@@ -1,3 +1,4 @@
+using Assets.Scripts.Logic.Systems;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -22,6 +23,9 @@ namespace SpaceMatch3
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_uiSystems);
 #endif
             _logicSystems
+                //Init systems go here:
+                .Add(new InitGameFieldSystem())
+                //Run systems go here:
                 .Init();
 
             _uiSystems
