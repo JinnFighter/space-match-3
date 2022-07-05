@@ -1,3 +1,4 @@
+using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Systems;
 using Assets.Scripts.View.Systems;
 using Leopotam.Ecs;
@@ -10,6 +11,8 @@ namespace SpaceMatch3
         EcsWorld _world;
         EcsSystems _logicSystems;
         EcsSystems _uiSystems;
+
+        [SerializeField] private ViewContainer _viewContainer;
 
         void Start() 
         {
@@ -33,6 +36,9 @@ namespace SpaceMatch3
                 //Init systems go here:
                 .Add(new InitTileViewSystem())
                 //Run systems go here:
+
+                //Injected classes go here:
+                .Inject(_viewContainer)
                 .Init();
         }
 
