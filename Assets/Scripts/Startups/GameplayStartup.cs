@@ -1,4 +1,5 @@
 using Assets.Scripts.Logic.Systems;
+using Assets.Scripts.View.Systems;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -29,6 +30,9 @@ namespace SpaceMatch3
                 .Init();
 
             _uiSystems
+                //Init systems go here:
+                .Add(new InitTileViewSystem())
+                //Run systems go here:
                 .Init();
         }
 
