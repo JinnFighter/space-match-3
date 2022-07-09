@@ -1,7 +1,11 @@
+using Assets.Scripts.View.Views;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PrefabsContent", menuName = "Content/PrefabsContent")]
-public class PrefabsContent : ScriptableObject
+namespace Assets.Scripts.View.Content
 {
-    [field: SerializeField] public TileView TileView { get; private set; }
+    [CreateAssetMenu(fileName = "PrefabsContent", menuName = "Content/PrefabsContent")]
+    public class PrefabsContent : ScriptableObject
+    {
+        [field: SerializeField] public TileView TileView { get; private set; }
+    }
 }

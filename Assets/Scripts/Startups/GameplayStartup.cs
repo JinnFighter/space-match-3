@@ -1,11 +1,12 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems;
+using Assets.Scripts.View.Content;
 using Assets.Scripts.View.Systems;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace SpaceMatch3 
+namespace SpaceMatch3
 {
     sealed class GameplayStartup : MonoBehaviour 
     {

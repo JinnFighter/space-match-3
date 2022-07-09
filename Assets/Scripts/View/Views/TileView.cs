@@ -1,9 +1,12 @@
 using UnityEngine;
 using TMPro;
 
-public class TileView : MonoBehaviour
+namespace Assets.Scripts.View.Views
 {
-    [SerializeField] private TextMeshProUGUI _stateText;
+    public class TileView : MonoBehaviour
+    {
+        [SerializeField] private TextMeshProUGUI _stateText;
 
-    public void SetState(int state) => _stateText.text = $"{ state }";
+        public void SetState(int state) => _stateText.text = $"{state}";
+    }
 }
