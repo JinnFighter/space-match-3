@@ -14,6 +14,8 @@ namespace SpaceMatch3
         EcsSystems _logicSystems;
         EcsSystems _uiSystems;
 
+        [SerializeField] private GameFieldDescription _gameFieldDescription;
+
         [SerializeField] private ViewContainer _viewContainer;
         [SerializeField] private PrefabsContent _prefabsContent;
 
@@ -36,6 +38,7 @@ namespace SpaceMatch3
 
                 //Injected classes go here:
                 .Inject(new GameFieldModel())
+                .Inject(_gameFieldDescription)
                 .Init();
 
             _uiSystems

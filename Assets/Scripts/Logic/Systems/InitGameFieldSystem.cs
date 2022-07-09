@@ -9,10 +9,11 @@ namespace Assets.Scripts.Logic.Systems
         private readonly EcsWorld _world = null;
 
         private readonly GameFieldModel _gameFieldModel = null;
+        private readonly GameFieldDescription _gameFieldDescription = null;
 
         void IEcsInitSystem.Init()
         {
-            _gameFieldModel.Tiles = new int[10, 10];
+            _gameFieldModel.Tiles = new int[_gameFieldDescription.Width, _gameFieldDescription.Height];
 
             for (int i = 0; i < _gameFieldModel.Width; i++)
             {
