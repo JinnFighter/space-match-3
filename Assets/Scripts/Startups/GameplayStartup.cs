@@ -45,7 +45,7 @@ namespace SpaceMatch3
                 //Init systems go here:
                 .Add(new InitTileViewSystem())
                 //Run systems go here:
-
+                .Add(new UpdateTileViewStateSystem())
                 //Injected classes go here:
                 .Inject(_viewContainer)
                 .Inject(_prefabsContent)
