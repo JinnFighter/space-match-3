@@ -33,7 +33,7 @@ namespace SpaceMatch3
                 //Run systems go here:
 
                 //Injected classes go here:
-                .Inject(new GameFieldModel(10, 10))
+                .Inject(new GameFieldModel())
                 .Init();
 
             _uiSystems
