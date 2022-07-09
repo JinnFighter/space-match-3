@@ -36,6 +36,7 @@ namespace SpaceMatch3
             _logicSystems
                 //Init systems go here:
                 .Add(new InitGameFieldSystem())
+                .Add(new GenerateTileStatesSystem())
                 //Run systems go here:
 
                 //Injected classes go here:

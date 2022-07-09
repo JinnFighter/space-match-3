@@ -11,14 +11,6 @@ namespace Assets.Scripts.Logic.Systems
         void IEcsInitSystem.Init()
         {
             _gameFieldModel.Tiles = new int[_gameFieldDescription.Width, _gameFieldDescription.Height];
-
-            for (int i = 0; i < _gameFieldModel.Width; i++)
-            {
-                for (int j = 0; j < _gameFieldModel.Height; j++)
-                {
-                    _gameFieldModel.Tiles[i, j] = -1;
-                }
-            }
         }
     }
 }
