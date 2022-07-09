@@ -15,6 +15,7 @@ namespace SpaceMatch3
         EcsSystems _uiSystems;
 
         [SerializeField] private GameFieldDescription _gameFieldDescription;
+        [SerializeField] private TileStatesDescription _tileStatesDescription;
 
         [SerializeField] private ViewContainer _viewContainer;
         [SerializeField] private PrefabsContent _prefabsContent;
@@ -31,14 +32,17 @@ namespace SpaceMatch3
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_logicSystems);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_uiSystems);
 #endif
+            var gameFieldModel = new GameFieldModel();
             _logicSystems
                 //Init systems go here:
                 .Add(new InitGameFieldSystem())
+                .Add(new GenerateTileStatesSystem())
                 //Run systems go here:
 
                 //Injected classes go here:
-                .Inject(new GameFieldModel())
+                .Inject(gameFieldModel)
                 .Inject(_gameFieldDescription)
+                .Inject(_tileStatesDescription)
                 .Init();
 
             _uiSystems
@@ -47,6 +51,7 @@ namespace SpaceMatch3
                 //Run systems go here:
                 .Add(new UpdateTileViewStateSystem())
                 //Injected classes go here:
+                .Inject(gameFieldModel)
                 .Inject(_viewContainer)
                 .Inject(_prefabsContent)
                 .Init();

@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameFieldDescription: {fileID: 11400000, guid: 90deca66877c50e4ca37d565f90f4a96, type: 2}
+  _tileStatesDescription: {fileID: 11400000, guid: 57d791f119e0fc44b97b1069d8a743a9, type: 2}
   _viewContainer: {fileID: 1734224751}
   _prefabsContent: {fileID: 11400000, guid: 434c2d80b100d1f42adb16bdbaf1d715, type: 2}
 --- !u!4 &1734224750
