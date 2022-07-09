@@ -16,13 +16,14 @@ namespace Assets.Scripts.View.Systems
 
         public void Init()
         {
+            var gameFieldView = Object.Instantiate(_prefabsContainer.GameFieldView, _viewContainer.GameplayCanvas.transform);
             foreach(var index in _filter)
             {
                 var entity = _filter.GetEntity(index);
                 ref var tileViewModel = ref entity.Get<TileViewModel>();
 
                 ref var tileViewContainer = ref entity.Get<TileViewContainer>();
-                tileViewContainer.TileView = Object.Instantiate(_prefabsContainer.TileView, _viewContainer.GameplayCanvas.transform);
+                tileViewContainer.TileView = Object.Instantiate(_prefabsContainer.TileView, gameFieldView.transform);
             }
         }
     }
