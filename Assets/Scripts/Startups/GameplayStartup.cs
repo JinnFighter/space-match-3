@@ -1,10 +1,12 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems;
+using Assets.Scripts.View.Content;
 using Assets.Scripts.View.Systems;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace SpaceMatch3 
+namespace SpaceMatch3
 {
     sealed class GameplayStartup : MonoBehaviour 
     {
@@ -12,7 +14,10 @@ namespace SpaceMatch3
         EcsSystems _logicSystems;
         EcsSystems _uiSystems;
 
+        [SerializeField] private GameFieldDescription _gameFieldDescription;
+
         [SerializeField] private ViewContainer _viewContainer;
+        [SerializeField] private PrefabsContent _prefabsContent;
 
         void Start() 
         {
@@ -30,15 +35,20 @@ namespace SpaceMatch3
                 //Init systems go here:
                 .Add(new InitGameFieldSystem())
                 //Run systems go here:
+
+                //Injected classes go here:
+                .Inject(new GameFieldModel())
+                .Inject(_gameFieldDescription)
                 .Init();
 
             _uiSystems
                 //Init systems go here:
                 .Add(new InitTileViewSystem())
                 //Run systems go here:
-
+                .Add(new UpdateTileViewStateSystem())
                 //Injected classes go here:
                 .Inject(_viewContainer)
+                .Inject(_prefabsContent)
                 .Init();
         }
 
