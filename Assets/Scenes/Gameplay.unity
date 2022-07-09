@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _viewContainer: {fileID: 1734224751}
+  _prefabsContent: {fileID: 11400000, guid: 434c2d80b100d1f42adb16bdbaf1d715, type: 2}
 --- !u!4 &1734224750
 Transform:
   m_ObjectHideFlags: 0

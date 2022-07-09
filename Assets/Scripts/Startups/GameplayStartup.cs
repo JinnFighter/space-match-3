@@ -14,6 +14,7 @@ namespace SpaceMatch3
         EcsSystems _uiSystems;
 
         [SerializeField] private ViewContainer _viewContainer;
+        [SerializeField] private PrefabsContent _prefabsContent;
 
         void Start() 
         {
@@ -43,6 +44,7 @@ namespace SpaceMatch3
 
                 //Injected classes go here:
                 .Inject(_viewContainer)
+                .Inject(_prefabsContent)
                 .Init();
         }
 
