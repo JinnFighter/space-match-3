@@ -1,4 +1,5 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems;
 using Assets.Scripts.View.Systems;
 using Leopotam.Ecs;
@@ -30,6 +31,9 @@ namespace SpaceMatch3
                 //Init systems go here:
                 .Add(new InitGameFieldSystem())
                 //Run systems go here:
+
+                //Injected classes go here:
+                .Inject(new GameFieldModel(10, 10))
                 .Init();
 
             _uiSystems
