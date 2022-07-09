@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PrefabsContent
   m_EditorClassIdentifier: 
   <TileView>k__BackingField: {fileID: 6902750920082164417, guid: 991f99147b6f7544687c260d06a4d45f, type: 3}
+  <GameFieldView>k__BackingField: {fileID: 2032303955699435715, guid: bd63f27876433524ca8868e24fde04f8, type: 3}

@@ -15,7 +15,7 @@ namespace Assets.Scripts.Common
     /// <summary>
     /// Layout Group controller that arranges children in bars, fitting as many on a line until total size exceeds parent bounds
     /// </summary>
-    [AddComponentMenu("Layout/Extensions/Auto Flow Layout Group")]
+    [AddComponentMenu("Layout/Extensions/Flexible Grid Layout")]
     public class FlexibleGridLayout : LayoutGroup
     {
         public enum Axis { Horizontal = 0, Vertical = 1 }

@@ -7,5 +7,6 @@ namespace Assets.Scripts.View.Content
     public class PrefabsContent : ScriptableObject
     {
         [field: SerializeField] public TileView TileView { get; private set; }
+        [field: SerializeField] public GameFieldView GameFieldView { get; private set; }
     }
 }
