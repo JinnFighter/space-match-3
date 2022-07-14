@@ -33,7 +33,10 @@ public class GameFieldContentController : IController
 
         _tileControllers.Clear();
 
-        Object.Destroy(_view.gameObject);
+        if(_view != null)
+        {
+            Object.Destroy(_view.gameObject);
+        }
     }
 
     public void Enable()

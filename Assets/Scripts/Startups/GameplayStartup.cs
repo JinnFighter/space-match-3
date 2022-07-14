@@ -20,6 +20,8 @@ namespace SpaceMatch3
                 ControllerContainer = new ControllerContainer(),
                 PrefabsContent = _prefabsContent,
                 DescriptionContent = _descriptionsContent,
+                ModelsContainer = new ModelsContainer(),
+                ViewContainer = _viewContainer,
             };
 
             foreach(var init in new InitContainer())

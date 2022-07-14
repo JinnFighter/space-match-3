@@ -24,7 +24,10 @@ public class TileContentController : IController
     public void Disable()
     {
         _controllers.Disable();
-        Object.Destroy(_view);
+        if(_view != null)
+        {
+            Object.Destroy(_view.gameObject);
+        }
     }
 
     public void Enable()

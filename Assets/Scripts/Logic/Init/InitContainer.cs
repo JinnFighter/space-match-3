@@ -8,7 +8,7 @@ namespace Assets.Scripts.Init
     {
         public IEnumerator<IInit> GetEnumerator()
         {
-            yield break;
+            yield return new GameFieldInit();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
