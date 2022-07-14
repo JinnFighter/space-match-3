@@ -20,6 +20,8 @@ namespace SpaceMatch3
         [SerializeField] private ViewContainer _viewContainer;
         [SerializeField] private PrefabsContent _prefabsContent;
 
+        private ControllerContainer _controllerContainer;
+
         void Start() 
         {
             // void can be switched to IEnumerator for support coroutines.
@@ -32,6 +34,7 @@ namespace SpaceMatch3
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_logicSystems);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_uiSystems);
 #endif
+            _controllerContainer = new ControllerContainer();
             var gameFieldModel = new GameFieldModel();
             _logicSystems
                 //Init systems go here:
@@ -55,6 +58,8 @@ namespace SpaceMatch3
                 .Inject(_viewContainer)
                 .Inject(_prefabsContent)
                 .Init();
+
+            _controllerContainer.Enable();
         }
 
         void Update()
@@ -65,6 +70,9 @@ namespace SpaceMatch3
 
         void OnDestroy() 
         {
+            _controllerContainer.Disable();
+            _controllerContainer.Clear();
+
             if (_uiSystems != null)
             {
                 _uiSystems.Destroy();
