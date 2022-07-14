@@ -1,5 +1,8 @@
-public interface IController
+namespace Assets.Scripts.Common
 {
-    void Enable();
-    void Disable();
+    public interface IController
+    {
+        void Enable();
+        void Disable();
+    }
 }
