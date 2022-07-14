@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b788b288c1d3e04f974443031b851bc, type: 3}
   m_Name: PrefabsContent
   m_EditorClassIdentifier: 
+  <GameFieldView>k__BackingField: {fileID: 268069082243418113, guid: bd63f27876433524ca8868e24fde04f8, type: 3}
+  <TileView>k__BackingField: {fileID: 4804012768253041941, guid: 991f99147b6f7544687c260d06a4d45f, type: 3}
