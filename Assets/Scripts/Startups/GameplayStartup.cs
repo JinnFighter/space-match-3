@@ -1,4 +1,5 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Init;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems;
 using Assets.Scripts.View.Content;
@@ -38,6 +39,11 @@ namespace SpaceMatch3
             {
                 ControllerContainer = new ControllerContainer(),
             };
+
+            foreach(var init in new InitContainer())
+            {
+                init.Init(_game);
+            }
 
             var gameFieldModel = new GameFieldModel();
             _logicSystems
