@@ -1,5 +1,6 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Init;
+using Assets.Scripts.Logic.Content;
 using UnityEngine;
 
 namespace SpaceMatch3
@@ -10,6 +11,7 @@ namespace SpaceMatch3
         [SerializeField] private TileStatesDescription _tileStatesDescription;
 
         [SerializeField] private ViewContainer _viewContainer;
+        [SerializeField] private PrefabsContent _prefabsContent;
 
         private IGame _game;
 
@@ -18,6 +20,7 @@ namespace SpaceMatch3
             _game = new Game
             {
                 ControllerContainer = new ControllerContainer(),
+                PrefabsContent = _prefabsContent,
             };
 
             foreach(var init in new InitContainer())
