@@ -7,11 +7,9 @@ namespace SpaceMatch3
 {
     sealed class GameplayStartup : MonoBehaviour 
     {
-        [SerializeField] private GameFieldDescription _gameFieldDescription;
-        [SerializeField] private TileStatesDescription _tileStatesDescription;
-
         [SerializeField] private ViewContainer _viewContainer;
         [SerializeField] private PrefabsContent _prefabsContent;
+        [SerializeField] private DescriptionsContent _descriptionsContent;
 
         private IGame _game;
 
@@ -21,6 +19,7 @@ namespace SpaceMatch3
             {
                 ControllerContainer = new ControllerContainer(),
                 PrefabsContent = _prefabsContent,
+                DescriptionContent = _descriptionsContent,
             };
 
             foreach(var init in new InitContainer())

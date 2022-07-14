@@ -6,5 +6,6 @@ namespace Assets.Scripts.Common
     {
         ControllerContainer ControllerContainer { get; }
         PrefabsContent PrefabsContent { get; }
+        DescriptionsContent DescriptionContent { get; }
     }
 }
