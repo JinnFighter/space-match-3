@@ -29,7 +29,7 @@ namespace Assets.Scripts.Logic.Controllers
 
         private void OnClickEvent()
         {
-            _selectedTilesModel.SelectedPosition = _tileModel.Position;
+            _selectedTilesModel.LastSelected = _tileModel.Position;
         }
     }
 }

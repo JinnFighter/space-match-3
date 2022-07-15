@@ -2,20 +2,30 @@ using UnityEngine;
 
 public class SelectedTilesModel : MonoBehaviour
 {
-    private Vector2Int _outsidePosition = new(-1, -1);
-    private Vector2Int _selectedPosition;
-    public Vector2Int SelectedPosition
+    public Vector2Int OutsidePosition { get; } = new (-1, -1);
+    private Vector2Int _lastSelected;
+    public Vector2Int LastSelected
     {
-        get => _selectedPosition;
+        get => _lastSelected;
         set
         {
-            _selectedPosition = value;
-            SelectedPositionChanged?.Invoke(_selectedPosition);
+            _lastSelected = value;
+            LastSelectedChanged?.Invoke(_lastSelected);
         }
     }
 
-    public bool HasSelected() => _selectedPosition != _outsidePosition;
+    private Vector2Int _currentSelection;
+    public Vector2Int CurrentSelection
+    {
+        get => _currentSelection;
+        set
+        {
+            _currentSelection = value;
+            CurrentSelectionChanged?.Invoke(_currentSelection);
+        }
+    }
 
     public delegate void Vector2IntChange(Vector2Int value);
-    public event Vector2IntChange SelectedPositionChanged;
+    public event Vector2IntChange LastSelectedChanged;
+    public event Vector2IntChange CurrentSelectionChanged;
 }

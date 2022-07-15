@@ -17,12 +17,12 @@ namespace Assets.Scripts.Logic.Controllers
 
         public void Disable()
         {
-            _selectedTilesModel.SelectedPositionChanged -= OnSelectedPositionChanged;
+            _selectedTilesModel.LastSelectedChanged -= OnSelectedPositionChanged;
         }
 
         public void Enable()
         {
-            _selectedTilesModel.SelectedPositionChanged += OnSelectedPositionChanged;
+            _selectedTilesModel.LastSelectedChanged += OnSelectedPositionChanged;
         }
 
         private void OnSelectedPositionChanged(Vector2Int value)
