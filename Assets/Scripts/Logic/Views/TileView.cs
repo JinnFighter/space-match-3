@@ -10,8 +10,6 @@ namespace Assets.Scripts.Logic.Views
         [SerializeField] private TextMeshProUGUI _stateText;
         [SerializeField] private Image _stateImage;
 
-        public bool IsClicked { get; private set; }
-
         public void SetState(int state) => _stateText.text = state >= 0 ? $"{state}" : "-";
 
         public void Select() => _stateImage.color = new Color(_stateImage.color.r, _stateImage.color.g, _stateImage.color.b, 255);
@@ -20,9 +18,10 @@ namespace Assets.Scripts.Logic.Views
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            IsClicked = true;
+            ClickEvent?.Invoke();
         }
 
-        public void ResetClicked() => IsClicked = false;
+        public delegate void VoidDelegate();
+        public event VoidDelegate ClickEvent;
     }
 }
