@@ -29,7 +29,7 @@ namespace Assets.Scripts.Logic.Controllers
         {
             if(_gameFieldModel.IsInside(value))
             {
-                if(_selectedTilesModel.CurrentSelection == _selectedTilesModel.OutsidePosition)
+                if(_selectedTilesModel.CurrentSelection == _selectedTilesModel.NoSelection)
                 {
                     _selectedTilesModel.CurrentSelection = value;
                     _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
@@ -38,17 +38,33 @@ namespace Assets.Scripts.Logic.Controllers
                 {
                     if(_selectedTilesModel.CurrentSelection == value)
                     {
-                        _selectedTilesModel.CurrentSelection = _selectedTilesModel.OutsidePosition;
+                        _selectedTilesModel.CurrentSelection = _selectedTilesModel.NoSelection;
                         _gameFieldModel.Tiles[value.x, value.y].IsSelected = false;
                     }
                     else
                     {
-                        _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y].IsSelected = false;
-                        _selectedTilesModel.CurrentSelection = value;
-                        _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
+                        if(_gameFieldModel.IsAdjacent(_selectedTilesModel.CurrentSelection, value))
+                        {
+                            _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y].IsSelected = false;
+
+                            SwapTiles(_gameFieldModel.Tiles[value.x, value.y], _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y]);
+
+                            _selectedTilesModel.CurrentSelection = _selectedTilesModel.NoSelection;
+                        }
+                        else
+                        {
+                            _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y].IsSelected = false;
+                            _selectedTilesModel.CurrentSelection = value;
+                            _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
+                        }
                     }
                 }
             }
+        }
+
+        private void SwapTiles(TileModel first, TileModel second)
+        {
+            (second.State, first.State) = (first.State, second.State);
         }
     }
 }

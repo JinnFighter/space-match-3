@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SelectedTilesModel : MonoBehaviour
 {
-    public Vector2Int OutsidePosition { get; } = new (-1, -1);
+    public Vector2Int NoSelection { get; } = new (-1, -1);
     private Vector2Int _lastSelected;
     public Vector2Int LastSelected
     {
