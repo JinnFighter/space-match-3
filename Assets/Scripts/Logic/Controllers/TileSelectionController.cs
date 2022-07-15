@@ -29,7 +29,25 @@ namespace Assets.Scripts.Logic.Controllers
         {
             if(_gameFieldModel.IsInside(value))
             {
-                _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
+                if(_selectedTilesModel.CurrentSelection == _selectedTilesModel.OutsidePosition)
+                {
+                    _selectedTilesModel.CurrentSelection = value;
+                    _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
+                }
+                else
+                {
+                    if(_selectedTilesModel.CurrentSelection == value)
+                    {
+                        _selectedTilesModel.CurrentSelection = _selectedTilesModel.OutsidePosition;
+                        _gameFieldModel.Tiles[value.x, value.y].IsSelected = false;
+                    }
+                    else
+                    {
+                        _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y].IsSelected = false;
+                        _selectedTilesModel.CurrentSelection = value;
+                        _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
+                    }
+                }
             }
         }
     }
