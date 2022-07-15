@@ -18,6 +18,6 @@ public class GameFieldInit : IInit
             }
         }
 
-        game.ControllerContainer.Add(new GameFieldContentController(gameFieldModel, game.PrefabsContent, game.ViewContainer));
+        game.ControllerContainer.Add(new GameFieldContentController(gameFieldModel, game.ModelsContainer.SelectedTilesModel, game.PrefabsContent, game.ViewContainer));
     }
 }

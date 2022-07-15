@@ -1,18 +1,19 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Views;
-using UnityEngine;
 
 namespace Assets.Scripts.Logic.Controllers
 {
     public class TileViewInputController : IController
     {
         private readonly TileModel _tileModel;
+        private readonly SelectedTilesModel _selectedTilesModel;
         private readonly TileView _view;
 
-        public TileViewInputController(TileModel tileModel, TileView view)
+        public TileViewInputController(TileModel tileModel, SelectedTilesModel selectedTilesModel, TileView view)
         {
             _tileModel = tileModel;
+            _selectedTilesModel = selectedTilesModel;
             _view = view;
         }
 
@@ -28,7 +29,7 @@ namespace Assets.Scripts.Logic.Controllers
 
         private void OnClickEvent()
         {
-            Debug.Log($"Clicked at { _tileModel.Position }");
+            _selectedTilesModel.SelectedPosition = _tileModel.Position;
         }
     }
 }

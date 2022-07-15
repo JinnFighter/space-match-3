@@ -8,6 +8,7 @@ using UnityEngine;
 public class TileContentController : IController
 {
     private readonly TileModel _tileModel;
+    private readonly SelectedTilesModel _selectedTilesModel;
     private readonly TileView _content;
     private readonly GameFieldView _gameFieldView;
 
@@ -15,9 +16,10 @@ public class TileContentController : IController
 
     private TileView _view;
 
-    public TileContentController(TileModel tileModel, TileView content, GameFieldView gameFieldView)
+    public TileContentController(TileModel tileModel, SelectedTilesModel selectedTilesModel, TileView content, GameFieldView gameFieldView)
     {
         _tileModel = tileModel;
+        _selectedTilesModel = selectedTilesModel;
         _content = content;
         _gameFieldView = gameFieldView;
     }
@@ -36,7 +38,7 @@ public class TileContentController : IController
         _view = Object.Instantiate(_content, _gameFieldView.transform);
         _controllers = new CompositeController(new List<IController>
         {
-            new TileViewInputController(_tileModel, _view),
+            new TileViewInputController(_tileModel, _selectedTilesModel, _view),
             new TileViewSelectionController(_tileModel, _view),
         });
         _controllers.Enable();

@@ -8,15 +8,17 @@ using UnityEngine;
 public class GameFieldContentController : IController
 {
     private readonly GameFieldModel _gameFieldModel;
+    private readonly SelectedTilesModel _selectedTilesModel;
     private readonly PrefabsContent _prefabsContent;
     private readonly ViewContainer _viewContainer;
     private readonly Dictionary<TileModel, IController> _tileControllers = new();
 
     private GameFieldView _view;
 
-    public GameFieldContentController(GameFieldModel gameFieldModel, PrefabsContent prefabsContent, ViewContainer viewContainer)
+    public GameFieldContentController(GameFieldModel gameFieldModel, SelectedTilesModel selectedTilesModel, PrefabsContent prefabsContent, ViewContainer viewContainer)
     {
         _gameFieldModel = gameFieldModel;
+        _selectedTilesModel = selectedTilesModel;
         _prefabsContent = prefabsContent;
         _viewContainer = viewContainer;
     }
@@ -47,7 +49,7 @@ public class GameFieldContentController : IController
         {
             for (var j = 0; j < _gameFieldModel.Height; j++)
             {
-                var controller = new TileContentController(_gameFieldModel.Tiles[i, j], _prefabsContent.TileView, _view);
+                var controller = new TileContentController(_gameFieldModel.Tiles[i, j], _selectedTilesModel, _prefabsContent.TileView, _view);
                 _tileControllers.Add(_gameFieldModel.Tiles[i, j], controller);
                 controller.Enable();
             }
