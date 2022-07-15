@@ -27,9 +27,9 @@ namespace Assets.Scripts.Logic.Controllers
 
         private void OnSelectedPositionChanged(Vector2Int value)
         {
-            if(_gameFieldModel.IsInside(value))
+            if(IsInside(value))
             {
-                if(_selectedTilesModel.CurrentSelection == _selectedTilesModel.OutsidePosition)
+                if(_selectedTilesModel.CurrentSelection == _selectedTilesModel.NoSelection)
                 {
                     _selectedTilesModel.CurrentSelection = value;
                     _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
@@ -38,17 +38,47 @@ namespace Assets.Scripts.Logic.Controllers
                 {
                     if(_selectedTilesModel.CurrentSelection == value)
                     {
-                        _selectedTilesModel.CurrentSelection = _selectedTilesModel.OutsidePosition;
+                        _selectedTilesModel.CurrentSelection = _selectedTilesModel.NoSelection;
                         _gameFieldModel.Tiles[value.x, value.y].IsSelected = false;
                     }
                     else
                     {
-                        _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y].IsSelected = false;
-                        _selectedTilesModel.CurrentSelection = value;
-                        _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
+                        if(IsAdjacent(_selectedTilesModel.CurrentSelection, value))
+                        {
+                            _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y].IsSelected = false;
+
+                            SwapTiles(_gameFieldModel.Tiles[value.x, value.y], _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y]);
+
+                            _selectedTilesModel.CurrentSelection = _selectedTilesModel.NoSelection;
+                        }
+                        else
+                        {
+                            _gameFieldModel.Tiles[_selectedTilesModel.CurrentSelection.x, _selectedTilesModel.CurrentSelection.y].IsSelected = false;
+                            _selectedTilesModel.CurrentSelection = value;
+                            _gameFieldModel.Tiles[value.x, value.y].IsSelected = true;
+                        }
                     }
                 }
             }
         }
+
+        private void SwapTiles(TileModel first, TileModel second)
+        {
+            (second.State, first.State) = (first.State, second.State);
+        }
+
+        private bool IsAdjacent(Vector2Int firstPos, Vector2Int secondPos)
+        {
+            bool IsAdjacentExceptDiagonal(Vector2Int firstPos, Vector2Int secondPos)
+            {
+                var dx = Mathf.Abs(firstPos.x - secondPos.x);
+                var dy = Mathf.Abs(firstPos.y - secondPos.y);
+                return dx <= 1 && dy <= 1 && (dx + dy) % 2 == 1;
+            }
+
+            return firstPos != secondPos && IsAdjacentExceptDiagonal(firstPos, secondPos);
+        }
+
+        private bool IsInside(Vector2Int position) => position.x >= 0 && position.x < _gameFieldModel.Width && position.y >= 0 && position.y < _gameFieldModel.Height;
     }
 }
