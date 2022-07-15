@@ -35,7 +35,7 @@ public class TileContentController : IController
         _view = Object.Instantiate(_content, _gameFieldView.transform);
         _controllers = new CompositeController(new List<IController>
         {
-
+            new TileViewSelectionController(_tileModel, _view),
         });
         _controllers.Enable();
     }
