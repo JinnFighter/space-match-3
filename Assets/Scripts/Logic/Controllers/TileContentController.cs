@@ -1,4 +1,5 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic.Controllers;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Views;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ public class TileContentController : IController
         _view = Object.Instantiate(_content, _gameFieldView.transform);
         _controllers = new CompositeController(new List<IController>
         {
+            new TileViewInputController(_tileModel, _view),
             new TileViewSelectionController(_tileModel, _view),
         });
         _controllers.Enable();
