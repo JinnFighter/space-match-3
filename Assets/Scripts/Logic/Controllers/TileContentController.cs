@@ -40,6 +40,7 @@ public class TileContentController : IController
         {
             new TileViewInputController(_tileModel, _selectedTilesModel, _view),
             new TileViewSelectionController(_tileModel, _view),
+            new TileViewStateController(_tileModel, _view),
         });
         _controllers.Enable();
     }
