@@ -3,11 +3,13 @@ using Assets.Scripts.Logic;
 using Assets.Scripts.Logic.Controllers;
 using Assets.Scripts.Logic.Models;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameFieldInit : IInit
 {
     public void Init(IGame game)
     {
+        var tileStatesDescription = game.DescriptionContent.TileStatesDescription;
         var gameFieldDescription = game.DescriptionContent.GameFieldDescription;
         var gameFieldModel = game.ModelsContainer.GameFieldModel;
         gameFieldModel.Tiles = new TileModel[gameFieldDescription.Width, gameFieldDescription.Height];
@@ -16,7 +18,7 @@ public class GameFieldInit : IInit
         {
             for (var j = 0; j < gameFieldDescription.Height; j++)
             {
-                gameFieldModel.Tiles[i, j] = new TileModel { Position = new(i, j) };
+                gameFieldModel.Tiles[i, j] = new TileModel { Position = new(i, j), State = Random.Range(0, tileStatesDescription.MaxState) };
             }
         }
 
