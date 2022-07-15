@@ -14,7 +14,7 @@ public class SelectedTilesModel : MonoBehaviour
         }
     }
 
-    private Vector2Int _currentSelection;
+    private Vector2Int _currentSelection = new(-1, -1);
     public Vector2Int CurrentSelection
     {
         get => _currentSelection;
