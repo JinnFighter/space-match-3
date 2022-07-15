@@ -1,5 +1,6 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic;
+using Assets.Scripts.Logic.Controllers;
 using Assets.Scripts.Logic.Models;
 
 public class GameFieldInit : IInit
@@ -18,6 +19,10 @@ public class GameFieldInit : IInit
             }
         }
 
-        game.ControllerContainer.Add(new GameFieldContentController(gameFieldModel, game.ModelsContainer.SelectedTilesModel, game.PrefabsContent, game.ViewContainer));
+        game.ControllerContainer.Add(new CompositeController(new System.Collections.Generic.List<IController>
+        {
+            new TileSelectionController(gameFieldModel, game.ModelsContainer.SelectedTilesModel),
+            new GameFieldContentController(gameFieldModel, game.ModelsContainer.SelectedTilesModel, game.PrefabsContent, game.ViewContainer),
+        }));
     }
 }
