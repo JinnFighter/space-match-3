@@ -1,41 +1,41 @@
-using Assets.Scripts.Common;
-using Assets.Scripts.Init;
-using Assets.Scripts.Logic.Content;
+using Leopotam.Ecs;
 using UnityEngine;
 
-namespace SpaceMatch3
+namespace SpaceMatch3 
 {
     sealed class GameplayStartup : MonoBehaviour 
     {
-        [SerializeField] private ViewContainer _viewContainer;
-        [SerializeField] private PrefabsContent _prefabsContent;
-        [SerializeField] private DescriptionsContent _descriptionsContent;
-
-        private IGame _game;
+        private EcsWorld _world;
+        private EcsSystems _systems;
 
         void Start() 
+        {   
+            _world = new EcsWorld();
+            _systems = new EcsSystems(_world);
+
+            #if UNITY_EDITOR
+                Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
+                Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
+            #endif
+
+            _systems
+                .Init();
+        }
+
+        void Update() 
         {
-            _game = new Game
-            {
-                ControllerContainer = new ControllerContainer(),
-                PrefabsContent = _prefabsContent,
-                DescriptionContent = _descriptionsContent,
-                ModelsContainer = new ModelsContainer(),
-                ViewContainer = _viewContainer,
-            };
-
-            foreach(var init in new InitContainer())
-            {
-                init.Init(_game);
-            }
-
-            _game.ControllerContainer.Enable();
+            _systems?.Run();
         }
 
         void OnDestroy() 
         {
-            _game.ControllerContainer.Disable();
-            _game.ControllerContainer.Clear();
+            if (_systems != null) 
+            {
+                _systems.Destroy();
+                _systems = null;
+                _world.Destroy();
+                _world = null;
+            }
         }
     }
 }
