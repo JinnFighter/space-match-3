@@ -53,6 +53,8 @@ namespace SpaceMatch3
 
         private void AddOneFrameComponents()
         {
+            _systems
+                .OneFrame<TileClicked>();
         }
 
         private void AddRunSystems()
