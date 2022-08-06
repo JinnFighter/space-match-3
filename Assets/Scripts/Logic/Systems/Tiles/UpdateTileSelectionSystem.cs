@@ -14,7 +14,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
             {
                 ref var tile = ref _filter.Get1(index);
                 var tileViewContainer = _filter.Get2(index);
-                var tileModel = _gameFieldModel.Tiles[tile.Position.x, tile.Position.y];
+                var tileModel = _gameFieldModel[tile.Position];
                 if(tile.IsSelected != tileModel.IsSelected)
                 {
                     tile.IsSelected = tileModel.IsSelected;
