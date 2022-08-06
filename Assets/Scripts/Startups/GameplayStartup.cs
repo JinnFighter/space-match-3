@@ -61,6 +61,7 @@ namespace SpaceMatch3
         {
             _systems
                 .Add(new CheckTileClickedSystem())
+                .Add(new SetTileSelectionSystem())
                 .Add(new UpdateTileStatesSystem())
                 .Add(new UpdateTileSelectionSystem());
         }
