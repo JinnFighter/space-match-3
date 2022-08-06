@@ -1,4 +1,5 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
@@ -6,7 +7,7 @@ using UnityEngine;
 using Voody.UniLeo;
 using Zenject;
 
-namespace SpaceMatch3 
+namespace SpaceMatch3
 {
     sealed class GameplayStartup : MonoBehaviour 
     {
