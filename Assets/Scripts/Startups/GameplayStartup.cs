@@ -60,6 +60,7 @@ namespace SpaceMatch3
         private void AddRunSystems()
         {
             _systems
+                .Add(new CheckTileClickedSystem())
                 .Add(new UpdateTileStatesSystem());
         }
 
