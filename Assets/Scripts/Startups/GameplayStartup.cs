@@ -1,6 +1,7 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Systems.GameField;
+using Assets.Scripts.Logic.Systems.Tiles;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -56,6 +57,8 @@ namespace SpaceMatch3
 
         private void AddRunSystems()
         {
+            _systems
+                .Add(new UpdateTileStatesSystem());
         }
 
         private void AddInjections()
