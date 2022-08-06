@@ -61,7 +61,8 @@ namespace SpaceMatch3
         {
             _systems
                 .Add(new CheckTileClickedSystem())
-                .Add(new UpdateTileStatesSystem());
+                .Add(new UpdateTileStatesSystem())
+                .Add(new UpdateTileSelectionSystem());
         }
 
         private void AddInjections()
