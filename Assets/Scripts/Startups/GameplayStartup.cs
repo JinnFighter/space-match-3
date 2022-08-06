@@ -59,7 +59,8 @@ namespace SpaceMatch3
         private void AddInitSystems()
         {
             _systems
-                .Add(new InitGameFieldSystem());
+                .Add(new InitGameFieldSystem())
+                .Add(new InitGameFieldViewSystem());
         }
 
         void Update() 
