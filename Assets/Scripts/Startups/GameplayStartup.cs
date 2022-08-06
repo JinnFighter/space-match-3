@@ -1,5 +1,6 @@
 using Leopotam.Ecs;
 using UnityEngine;
+using Zenject;
 
 namespace SpaceMatch3 
 {
@@ -7,6 +8,9 @@ namespace SpaceMatch3
     {
         private EcsWorld _world;
         private EcsSystems _systems;
+
+        [Inject]
+        private GameFieldModel _gameFieldModel;
 
         void Start() 
         {   
@@ -19,6 +23,7 @@ namespace SpaceMatch3
             #endif
 
             _systems
+                .Inject(_gameFieldModel)
                 .Init();
         }
 
