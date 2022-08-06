@@ -1,3 +1,4 @@
+using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
 using System;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace SpaceMatch3
         private GameFieldModel _gameFieldModel;
         [Inject]
         private GameFieldDescription _gameFieldDescription;
+        [Inject]
+        private GameFieldView _gameFieldView;
 
         void Start() 
         {   
@@ -45,7 +48,8 @@ namespace SpaceMatch3
         {
             _systems
                 .Inject(_gameFieldModel)
-                .Inject(_gameFieldDescription);
+                .Inject(_gameFieldDescription)
+                .Inject(_gameFieldView);
         }
 
         private void AddInitSystems()

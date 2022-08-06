@@ -1,3 +1,4 @@
+using Assets.Scripts.Logic.Views;
 using System;
 using UnityEngine;
 using Zenject;
@@ -5,10 +6,19 @@ using Zenject;
 public class GameplayInstaller : MonoInstaller
 {
     [SerializeField] private GameFieldDescription _gameFieldDescription;
+
+    [SerializeField] private GameFieldView _gameFieldView;
+
     public override void InstallBindings()
     {
         BindDescriptions();
         BindModels();
+        BindPrefabs();
+    }
+
+    private void BindPrefabs()
+    {
+        Container.Bind<GameFieldView>().FromComponentInNewPrefab(_gameFieldView).AsTransient();
     }
 
     private void BindDescriptions()
