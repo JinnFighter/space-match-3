@@ -2,8 +2,8 @@ using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
-using System;
 using UnityEngine;
+using Voody.UniLeo;
 using Zenject;
 
 namespace SpaceMatch3 
@@ -34,12 +34,19 @@ namespace SpaceMatch3
                 Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
 #endif
 
+            AddExtensions();
             AddInitSystems();
             AddRunSystems();
             AddOneFrameComponents();
             AddInjections();
 
             _systems.Init();
+        }
+
+        private void AddExtensions()
+        {
+            _systems
+                .ConvertScene();
         }
 
         private void AddOneFrameComponents()
