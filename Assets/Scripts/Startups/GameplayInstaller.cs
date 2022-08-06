@@ -27,8 +27,8 @@ public class GameplayInstaller : MonoInstaller
 
     private void BindPrefabs()
     {
-        Container.Bind<GameFieldView>().FromComponentInNewPrefab(_gameFieldView).AsTransient();
-        Container.Bind<TileView>().FromComponentInNewPrefab(_tileView).AsTransient();
+        Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
+        Container.Bind<TileView>().FromInstance(_tileView).AsTransient();
     }
 
     private void BindDescriptions()
