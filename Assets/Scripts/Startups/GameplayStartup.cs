@@ -1,3 +1,4 @@
+using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
@@ -20,6 +21,8 @@ namespace SpaceMatch3
         private GameFieldView _gameFieldView;
         [Inject]
         private TileView _tileView;
+        [Inject]
+        private ViewContainer _viewContainer;
 
         void Start() 
         {   
@@ -53,7 +56,8 @@ namespace SpaceMatch3
                 .Inject(_gameFieldModel)
                 .Inject(_gameFieldDescription)
                 .Inject(_gameFieldView)
-                .Inject(_tileView);
+                .Inject(_tileView)
+                .Inject(_viewContainer);
         }
 
         private void AddInitSystems()

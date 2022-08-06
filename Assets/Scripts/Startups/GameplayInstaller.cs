@@ -1,3 +1,4 @@
+using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Views;
 using System;
 using UnityEngine;
@@ -9,12 +10,19 @@ public class GameplayInstaller : MonoInstaller
 
     [SerializeField] private GameFieldView _gameFieldView;
     [SerializeField] private TileView _tileView;
+    [SerializeField] private ViewContainer _viewContainer;
 
     public override void InstallBindings()
     {
         BindDescriptions();
         BindModels();
         BindPrefabs();
+        BindScene();
+    }
+
+    private void BindScene()
+    {
+        Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
     }
 
     private void BindPrefabs()
