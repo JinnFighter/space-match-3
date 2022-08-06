@@ -613,3 +613,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameFieldDescription: {fileID: 11400000, guid: 90deca66877c50e4ca37d565f90f4a96, type: 2}
   _gameFieldView: {fileID: 268069082243418113, guid: bd63f27876433524ca8868e24fde04f8, type: 3}
+  _tileView: {fileID: 4804012768253041941, guid: 991f99147b6f7544687c260d06a4d45f, type: 3}

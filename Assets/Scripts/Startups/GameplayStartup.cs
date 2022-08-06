@@ -17,6 +17,8 @@ namespace SpaceMatch3
         private GameFieldDescription _gameFieldDescription;
         [Inject]
         private GameFieldView _gameFieldView;
+        [Inject]
+        private TileView _tileView;
 
         void Start() 
         {   
@@ -49,7 +51,8 @@ namespace SpaceMatch3
             _systems
                 .Inject(_gameFieldModel)
                 .Inject(_gameFieldDescription)
-                .Inject(_gameFieldView);
+                .Inject(_gameFieldView)
+                .Inject(_tileView);
         }
 
         private void AddInitSystems()

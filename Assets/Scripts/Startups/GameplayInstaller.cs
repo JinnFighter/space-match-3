@@ -8,6 +8,7 @@ public class GameplayInstaller : MonoInstaller
     [SerializeField] private GameFieldDescription _gameFieldDescription;
 
     [SerializeField] private GameFieldView _gameFieldView;
+    [SerializeField] private TileView _tileView;
 
     public override void InstallBindings()
     {
@@ -19,6 +20,7 @@ public class GameplayInstaller : MonoInstaller
     private void BindPrefabs()
     {
         Container.Bind<GameFieldView>().FromComponentInNewPrefab(_gameFieldView).AsTransient();
+        Container.Bind<TileView>().FromComponentInNewPrefab(_tileView).AsTransient();
     }
 
     private void BindDescriptions()
