@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class GameFieldModel
 {
     public readonly TileModel[,] Tiles;
@@ -21,4 +23,6 @@ public class GameFieldModel
 
     public int Width => Tiles.GetLength(0);
     public int Height => Tiles.GetLength(1);
+    public TileModel this[Vector2Int position] => Tiles[position.x, position.y];
+    public TileModel this[int x, int y] => Tiles[x, y];
 }
