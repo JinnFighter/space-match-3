@@ -11,6 +11,8 @@ namespace SpaceMatch3
 
         [Inject]
         private GameFieldModel _gameFieldModel;
+        [Inject]
+        private GameFieldDescription _gameFieldDescription;
 
         void Start() 
         {   
@@ -24,6 +26,7 @@ namespace SpaceMatch3
 
             _systems
                 .Inject(_gameFieldModel)
+                .Inject(_gameFieldDescription)
                 .Init();
         }
 
