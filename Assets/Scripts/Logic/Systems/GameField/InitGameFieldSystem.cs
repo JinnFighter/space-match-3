@@ -14,7 +14,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
             {
                 for (var j = 0; j < _gameFieldModel.Height; j++)
                 {
-                    _gameFieldModel.Tiles[i, j].State = Random.Range(_gameFieldDescription.EmptyFieldState + 1, _gameFieldDescription.MaxState);
+                    _gameFieldModel[i, j].State = Random.Range(_gameFieldDescription.EmptyFieldState + 1, _gameFieldDescription.MaxState);
                 }
             }
         }

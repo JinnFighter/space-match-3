@@ -40,7 +40,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
 
         private void Select(Vector2Int tilePosition, EcsEntity entity)
         {
-            _gameFieldModel.Tiles[tilePosition.x, tilePosition.y].IsSelected = true;
+            _gameFieldModel[tilePosition].IsSelected = true;
             entity.Get<TileSelected>();
         }
 
@@ -49,7 +49,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
             foreach (var index in _selectedFilter)
             {
                 var tile = _selectedFilter.Get1(index);
-                _gameFieldModel.Tiles[tile.Position.x, tile.Position.y].IsSelected = false;
+                _gameFieldModel[tile.Position].IsSelected = false;
                 var entity = _selectedFilter.GetEntity(index);
                 entity.Del<TileSelected>();
             }
