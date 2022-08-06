@@ -27,7 +27,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
                     var tileEntity = _world.NewEntity();
                     ref var tile = ref tileEntity.Get<Tile>();
                     tile.Position = new Vector2Int(i, j);
-                    tile.State = _gameFieldModel.Tiles[i, j];
+                    tile.State = _gameFieldModel.Tiles[i, j].State;
                     tileView.SetState(tile.State);
                     ref var tileViewContainer = ref tileEntity.Get<TileViewContainer>();
                     tileViewContainer.TileView = tileView;

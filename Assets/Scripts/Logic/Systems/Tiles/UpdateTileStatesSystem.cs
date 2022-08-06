@@ -15,9 +15,10 @@ namespace Assets.Scripts.Logic.Systems.Tiles
                 ref var tile = ref _filter.Get1(index);
                 var tileViewContainer = _filter.Get2(index);
 
-                if(tile.State != _gameFieldModel.Tiles[tile.Position.x, tile.Position.y])
+                var tileModel = _gameFieldModel.Tiles[tile.Position.x, tile.Position.y];
+                if(tile.State != tileModel.State)
                 {
-                    tile.State = _gameFieldModel.Tiles[tile.Position.x, tile.Position.y];
+                    tile.State = tileModel.State;
                     tileViewContainer.TileView.SetState(tile.State);
                 }
             }
