@@ -1,4 +1,5 @@
 using Leopotam.Ecs;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -22,12 +23,35 @@ namespace SpaceMatch3
             #if UNITY_EDITOR
                 Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
                 Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
-            #endif
+#endif
 
+            AddInitSystems();
+            AddRunSystems();
+            AddOneFrameComponents();
+            AddInjections();
+
+            _systems.Init();
+        }
+
+        private void AddOneFrameComponents()
+        {
+        }
+
+        private void AddRunSystems()
+        {
+        }
+
+        private void AddInjections()
+        {
             _systems
                 .Inject(_gameFieldModel)
-                .Inject(_gameFieldDescription)
-                .Init();
+                .Inject(_gameFieldDescription);
+        }
+
+        private void AddInitSystems()
+        {
+            _systems
+                .Add(new InitGameFieldSystem());
         }
 
         void Update() 
