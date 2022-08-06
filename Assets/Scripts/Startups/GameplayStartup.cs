@@ -53,12 +53,17 @@ namespace SpaceMatch3
 
         private void AddOneFrameComponents()
         {
+            _systems
+                .OneFrame<TileClicked>();
         }
 
         private void AddRunSystems()
         {
             _systems
-                .Add(new UpdateTileStatesSystem());
+                .Add(new CheckTileClickedSystem())
+                .Add(new SetTileSelectionSystem())
+                .Add(new UpdateTileStatesSystem())
+                .Add(new UpdateTileSelectionSystem());
         }
 
         private void AddInjections()

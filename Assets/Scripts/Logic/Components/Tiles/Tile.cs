@@ -6,5 +6,6 @@ namespace Assets.Scripts.Logic.Components.Tiles
     {
         public Vector2Int Position;
         public int State;
+        public bool IsSelected;
     }
 }
