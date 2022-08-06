@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 6902750920082164416}
   - component: {fileID: 6902750920082164431}
   - component: {fileID: 4804012768253041941}
-  - component: {fileID: 6216968361678151333}
-  - component: {fileID: 5189556677638394810}
   m_Layer: 5
   m_Name: TileView
   m_TagString: Untagged
@@ -94,33 +92,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateText: {fileID: 6902750920392160728}
   _stateImage: {fileID: 6902750920082164431}
---- !u!114 &6216968361678151333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6902750920082164429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  convertMode: 0
---- !u!114 &5189556677638394810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6902750920082164429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32ef141352d8e1e479b5fddea8b40df1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    TileView: {fileID: 4804012768253041941}
 --- !u!1 &6902750920392160710
 GameObject:
   m_ObjectHideFlags: 0
