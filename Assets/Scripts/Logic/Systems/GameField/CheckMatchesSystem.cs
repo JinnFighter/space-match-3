@@ -38,7 +38,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 var currentPosition = startPosition + direction;
                 while (_gameFieldModel.IsInside(currentPosition) && (_gameFieldModel[currentPosition].State == _gameFieldModel[startPosition].State))
                 {
-                    matches.Add(direction);
+                    matches.Add(currentPosition);
                     currentPosition += direction;
                 }
             }
