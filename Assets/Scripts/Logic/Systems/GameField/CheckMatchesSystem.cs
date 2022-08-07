@@ -1,4 +1,5 @@
 using Assets.Scripts.Logic.Components.Gameplay;
+using Assets.Scripts.Logic.Extensions;
 using Leopotam.Ecs;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
 {
     public class CheckMatchesSystem : IEcsRunSystem
     {
+        private readonly EcsWorld _world = null;
         private readonly EcsFilter<TurnEvent> _filter = null;
         private readonly GameFieldModel _gameFieldModel = null;
 
@@ -21,7 +23,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
                     var matches = FindMatches(selectedTile, directions);
                     if(matches.Count >= 3)
                     {
-                        Debug.Log("Has match");
+                        _world.SendMessage(new MatchEvent { MatchPositions = matches });
                     }
                 }
             }
