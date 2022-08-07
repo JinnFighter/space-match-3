@@ -1,5 +1,6 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Views;
 using System;
 using UnityEngine;
@@ -40,5 +41,6 @@ public class GameplayInstaller : MonoInstaller
     private void BindModels()
     {
         Container.Bind<GameFieldModel>().AsSingle().NonLazy();
+        Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
     }
 }
