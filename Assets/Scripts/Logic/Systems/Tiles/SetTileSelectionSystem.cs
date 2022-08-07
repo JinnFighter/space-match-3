@@ -41,7 +41,11 @@ namespace Assets.Scripts.Logic.Systems.Tiles
         {
             var selectedTile = _gameFieldModel[_tileSelectionModel.SelectedTile];
             var clickedTile = _gameFieldModel[position];
-            (selectedTile.State, clickedTile.State) = (clickedTile.State, selectedTile.State);
+
+            if(_gameFieldModel.IsInside(selectedTile.Position) && _gameFieldModel.IsInside(clickedTile.Position) && _gameFieldModel.IsAdjacent(selectedTile.Position, clickedTile.Position))
+            {
+                (selectedTile.State, clickedTile.State) = (clickedTile.State, selectedTile.State);
+            }; 
         }
 
         private void Select(Vector2Int tilePosition)
