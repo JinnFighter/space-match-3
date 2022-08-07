@@ -26,7 +26,7 @@ public class GameplayInstaller : MonoInstaller
 
     private void BindHelpers()
     {
-        Container.Bind<IGameFieldGenerator>().To<RandomGameFieldGenerator>().AsTransient();
+        Container.Bind<IGameFieldGenerator>().To<RandomGameFieldGenerator>().AsTransient().NonLazy();
     }
 
     private void BindScene()

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Logic.Generators
@@ -7,6 +5,11 @@ namespace Assets.Scripts.Logic.Generators
     public class RandomGameFieldGenerator : IGameFieldGenerator
     {
         private readonly GameFieldDescription _gameFieldDescription;
+
+        public RandomGameFieldGenerator(GameFieldDescription gameFieldDescription)
+        {
+            _gameFieldDescription = gameFieldDescription;
+        }
 
         public int[,] GenerateGameField(int width, int height)
         {
