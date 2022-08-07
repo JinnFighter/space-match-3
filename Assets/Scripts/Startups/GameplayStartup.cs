@@ -1,4 +1,5 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
@@ -58,7 +59,8 @@ namespace SpaceMatch3
         private void AddOneFrameComponents()
         {
             _systems
-                .OneFrame<TileClicked>();
+                .OneFrame<TileClicked>()
+                .OneFrame<TurnEvent>();
         }
 
         private void AddRunSystems()
