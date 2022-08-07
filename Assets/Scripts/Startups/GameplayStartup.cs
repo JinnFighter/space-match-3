@@ -60,7 +60,8 @@ namespace SpaceMatch3
         {
             _systems
                 .OneFrame<TileClicked>()
-                .OneFrame<TurnEvent>();
+                .OneFrame<TurnEvent>()
+                .OneFrame<MatchEvent>();
         }
 
         private void AddRunSystems()
