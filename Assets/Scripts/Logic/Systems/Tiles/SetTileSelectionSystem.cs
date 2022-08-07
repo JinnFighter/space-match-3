@@ -1,58 +1,51 @@
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Models;
 using Leopotam.Ecs;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Logic.Systems.Tiles
 {
     public class SetTileSelectionSystem : IEcsRunSystem
     {
-        private readonly EcsFilter<Tile, TileClicked> _clickedFilter = null;
-        private readonly EcsFilter<Tile, TileSelected> _selectedFilter = null;
+        private readonly EcsFilter<Tile, TileClicked> _filter = null;
         private readonly GameFieldModel _gameFieldModel = null;
+        private readonly TileSelectionModel _tileSelectionModel = null;
 
         public void Run()
         {
-            foreach(var index in _clickedFilter)
+            foreach(var index in _filter)
             {
-                var tile = _clickedFilter.Get1(index);
-                var entity = _clickedFilter.GetEntity(index);
-                if (_selectedFilter.IsEmpty())
+                var tile = _filter.Get1(index);
+
+                if(_tileSelectionModel.HasSelection)
                 {
-                    Select(tile.Position, entity);
-                }
-                else 
-                {
-                    if (entity.Has<TileSelected>())
+                    if (_tileSelectionModel.SelectedTile == tile.Position)
                     {
                         Deselect();
                     }
                     else
                     {
                         Deselect();
-                        Select(tile.Position, entity);
+                        Select(tile.Position);
                     }
+                }
+                else
+                {
+                    Select(tile.Position);
                 }
             }
         }
 
-        private void Select(Vector2Int tilePosition, EcsEntity entity)
+        private void Select(Vector2Int tilePosition)
         {
             _gameFieldModel[tilePosition].IsSelected = true;
-            entity.Get<TileSelected>();
+            _tileSelectionModel.Select(tilePosition);
         }
 
         private void Deselect()
         {
-            foreach (var index in _selectedFilter)
-            {
-                var tile = _selectedFilter.Get1(index);
-                _gameFieldModel[tile.Position].IsSelected = false;
-                var entity = _selectedFilter.GetEntity(index);
-                entity.Del<TileSelected>();
-            }
+            _gameFieldModel[_tileSelectionModel.SelectedTile].IsSelected = false;
+            _tileSelectionModel.Deselect();
         }
     }
 }
