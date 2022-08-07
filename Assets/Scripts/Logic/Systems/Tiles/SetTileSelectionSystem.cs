@@ -1,4 +1,6 @@
+using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Extensions;
 using Assets.Scripts.Logic.Models;
 using Leopotam.Ecs;
 using System;
@@ -8,6 +10,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
 {
     public class SetTileSelectionSystem : IEcsRunSystem
     {
+        private readonly EcsWorld _world = null;
         private readonly EcsFilter<Tile, TileClicked> _filter = null;
         private readonly GameFieldModel _gameFieldModel = null;
         private readonly TileSelectionModel _tileSelectionModel = null;
@@ -45,6 +48,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
             if(_gameFieldModel.IsInside(selectedTile.Position) && _gameFieldModel.IsInside(clickedTile.Position) && _gameFieldModel.IsAdjacent(selectedTile.Position, clickedTile.Position))
             {
                 (selectedTile.State, clickedTile.State) = (clickedTile.State, selectedTile.State);
+                _world.SendMessage<TurnEvent>();
             }; 
         }
 
