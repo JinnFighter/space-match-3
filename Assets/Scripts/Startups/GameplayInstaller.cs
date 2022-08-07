@@ -1,5 +1,6 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Views;
 using System;
@@ -18,8 +19,14 @@ public class GameplayInstaller : MonoInstaller
     {
         BindDescriptions();
         BindModels();
+        BindHelpers();
         BindPrefabs();
         BindScene();
+    }
+
+    private void BindHelpers()
+    {
+        Container.Bind<IGameFieldGenerator>().To<RandomGameFieldGenerator>().AsTransient().NonLazy();
     }
 
     private void BindScene()

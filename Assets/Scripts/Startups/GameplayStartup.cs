@@ -1,5 +1,6 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Systems.Tiles;
@@ -21,7 +22,7 @@ namespace SpaceMatch3
         [Inject]
         private TileSelectionModel _tileSelectionModel;
         [Inject]
-        private GameFieldDescription _gameFieldDescription;
+        private IGameFieldGenerator _gameFieldGenerator;
         [Inject]
         private GameFieldView _gameFieldView;
         [Inject]
@@ -74,7 +75,7 @@ namespace SpaceMatch3
             _systems
                 .Inject(_gameFieldModel)
                 .Inject(_tileSelectionModel)
-                .Inject(_gameFieldDescription)
+                .Inject(_gameFieldGenerator)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
                 .Inject(_viewContainer);
