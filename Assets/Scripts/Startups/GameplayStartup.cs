@@ -1,4 +1,5 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
@@ -23,6 +24,8 @@ namespace SpaceMatch3
         private TileSelectionModel _tileSelectionModel;
         [Inject]
         private IGameFieldGenerator _gameFieldGenerator;
+        [Inject]
+        private GameFieldDescription _gameFieldDescription;
         [Inject]
         private GameFieldView _gameFieldView;
         [Inject]
@@ -58,7 +61,9 @@ namespace SpaceMatch3
         private void AddOneFrameComponents()
         {
             _systems
-                .OneFrame<TileClicked>();
+                .OneFrame<TileClicked>()
+                .OneFrame<TurnEvent>()
+                .OneFrame<MatchEvent>();
         }
 
         private void AddRunSystems()
@@ -66,6 +71,8 @@ namespace SpaceMatch3
             _systems
                 .Add(new CheckTileClickedSystem())
                 .Add(new SetTileSelectionSystem())
+                .Add(new CheckMatchesSystem())
+                .Add(new ClearMatchedTileSystem())
                 .Add(new UpdateTileStatesSystem())
                 .Add(new UpdateTileSelectionSystem());
         }
@@ -76,6 +83,7 @@ namespace SpaceMatch3
                 .Inject(_gameFieldModel)
                 .Inject(_tileSelectionModel)
                 .Inject(_gameFieldGenerator)
+                .Inject(_gameFieldDescription)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
                 .Inject(_viewContainer);
