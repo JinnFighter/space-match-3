@@ -1,6 +1,7 @@
 using Assets.Scripts.Logic.Components.Gameplay;
 using Leopotam.Ecs;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts.Logic.Systems.GameField
@@ -43,9 +44,36 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 {
                     _gameFieldModel[tileColumn[j]].State = _gameFieldModel[tileColumn[j + 1]].State;
                     _gameFieldModel[tileColumn[j + 1]].State = _gameFieldDescription.EmptyFieldState;
-
                 }
             }
+
+            for (var i = 0; i < emptyCount; i++)
+            {
+                var tile = _gameFieldModel[tileColumn[tileColumn.Count - 1 - i]];
+                tile.State = GetNewState(tile.Position);
+            }
+        }
+
+        private int GetNewState(Vector2Int position)
+        {
+            var possibleCharacters = Enumerable.Range(_gameFieldDescription.EmptyFieldState + 1, _gameFieldDescription.MaxState).ToList();
+
+            if (position.x > 0)
+            {
+                possibleCharacters.Remove(_gameFieldModel[position.x - 1, position.y].State);
+            }
+
+            if (position.x < _gameFieldModel.Width - 1)
+            {
+                possibleCharacters.Remove(_gameFieldModel[position.x + 1, position.y].State);
+            }
+
+            if (position.y > 0)
+            {
+                possibleCharacters.Remove(_gameFieldModel[position.x, position.y - 1].State);
+            }
+
+            return possibleCharacters[Random.Range(0, possibleCharacters.Count)];
         }
     }
 }
