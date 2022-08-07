@@ -9,5 +9,11 @@ namespace Assets.Scripts.Logic.Extensions
             var entity = world.NewEntity();
             entity.Get<T>();
         }
+
+        public static void SendMessage<T>(this EcsWorld world, T message) where T : struct
+        {
+            var entity = world.NewEntity();
+            entity.Replace(message);
+        }
     }
 }
