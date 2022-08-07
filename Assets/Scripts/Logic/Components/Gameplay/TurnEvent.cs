@@ -1,8 +1,9 @@
-using Leopotam.Ecs;
+using UnityEngine;
 
 namespace Assets.Scripts.Logic.Components.Gameplay
 {
-    public struct TurnEvent : IEcsIgnoreInFilter
+    public struct TurnEvent
     {
+        public Vector2Int[] SelectedTiles;
     }
 }
