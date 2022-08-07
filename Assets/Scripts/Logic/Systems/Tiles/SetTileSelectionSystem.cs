@@ -1,6 +1,7 @@
 using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Models;
 using Leopotam.Ecs;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Logic.Systems.Tiles
@@ -25,8 +26,8 @@ namespace Assets.Scripts.Logic.Systems.Tiles
                     }
                     else
                     {
+                        SwapStates(tile.Position);
                         Deselect();
-                        Select(tile.Position);
                     }
                 }
                 else
@@ -34,6 +35,13 @@ namespace Assets.Scripts.Logic.Systems.Tiles
                     Select(tile.Position);
                 }
             }
+        }
+
+        private void SwapStates(Vector2Int position)
+        {
+            var selectedTile = _gameFieldModel[_tileSelectionModel.SelectedTile];
+            var clickedTile = _gameFieldModel[position];
+            (selectedTile.State, clickedTile.State) = (clickedTile.State, selectedTile.State);
         }
 
         private void Select(Vector2Int tilePosition)
