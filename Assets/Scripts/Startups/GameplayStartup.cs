@@ -73,6 +73,7 @@ namespace SpaceMatch3
                 .Add(new SetTileSelectionSystem())
                 .Add(new CheckMatchesSystem())
                 .Add(new ClearMatchedTileSystem())
+                .Add(new ShiftTilesSystem())
                 .Add(new UpdateTileStatesSystem())
                 .Add(new UpdateTileSelectionSystem());
         }
