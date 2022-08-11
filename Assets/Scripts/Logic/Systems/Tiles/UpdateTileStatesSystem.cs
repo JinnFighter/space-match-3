@@ -1,4 +1,5 @@
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Descriptions;
 using Leopotam.Ecs;
 
 namespace Assets.Scripts.Logic.Systems.Tiles
@@ -7,6 +8,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
     {
         private readonly EcsFilter<Tile, TileViewContainer> _filter = null;
         private readonly GameFieldModel _gameFieldModel = null;
+        private readonly TileColorsDescription _tileColorsDescription = null;
 
         public void Run()
         {
@@ -19,7 +21,15 @@ namespace Assets.Scripts.Logic.Systems.Tiles
                 if(tile.State != tileModel.State)
                 {
                     tile.State = tileModel.State;
-                    tileViewContainer.TileView.SetState(tile.State);
+                    if(tile.State == _gameFieldModel.EmptyTileState)
+                    {
+                        tileViewContainer.TileView.DisableBall();
+                    }
+                    else
+                    {
+                        tileViewContainer.TileView.EnableBall();
+                        tileViewContainer.TileView.SetColor(_tileColorsDescription[tile.State]);
+                    }
                 }
             }
         }

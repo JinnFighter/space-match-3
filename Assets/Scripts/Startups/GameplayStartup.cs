@@ -1,6 +1,7 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems.GameField;
@@ -31,6 +32,8 @@ namespace SpaceMatch3
         [Inject]
         private IGameFieldGenerator _gameFieldGenerator;
         [Inject]
+        private TileColorsDescription _tileColorsDescription;
+        [Inject]
         private GameFieldView _gameFieldView;
         [Inject]
         private TileView _tileView;
@@ -47,7 +50,7 @@ namespace SpaceMatch3
             #if UNITY_EDITOR
                 Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
                 Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
-#endif
+            #endif
 
             AddExtensions();
             AddInitSystems();
@@ -99,6 +102,7 @@ namespace SpaceMatch3
                 .Inject(_scoreModel)
                 .Inject(_turnCountModel)
                 .Inject(_gameFieldGenerator)
+                .Inject(_tileColorsDescription)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
                 .Inject(_gameOverView)

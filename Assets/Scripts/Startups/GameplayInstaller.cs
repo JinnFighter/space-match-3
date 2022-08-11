@@ -1,4 +1,5 @@
 using Assets.Scripts.Common;
+using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Views;
@@ -8,6 +9,7 @@ using Zenject;
 public class GameplayInstaller : MonoInstaller
 {
     [SerializeField] private GameFieldDescription _gameFieldDescription;
+    [SerializeField] private TileColorsDescription _tileColorsDescription;
 
     [SerializeField] private GameFieldView _gameFieldView;
     [SerializeField] private TileView _tileView;
@@ -42,6 +44,7 @@ public class GameplayInstaller : MonoInstaller
     private void BindDescriptions()
     {
         Container.Bind<GameFieldDescription>().FromScriptableObject(_gameFieldDescription).AsSingle();
+        Container.Bind<TileColorsDescription>().FromScriptableObject(_tileColorsDescription).AsSingle();
     }
 
     private void BindModels()
