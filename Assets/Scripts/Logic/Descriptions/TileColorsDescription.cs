@@ -7,8 +7,7 @@ namespace Assets.Scripts.Logic.Descriptions
     public class TileColorsDescription : ScriptableObject
     {
         [field: SerializeField] public Color DefaultColor { get; private set; } = new Color(255, 255, 255, 0);
-        [field: SerializeField]
-        public List<Color> Colors { get; private set; } = new List<Color>
+        [field: SerializeField] public List<Color> Colors { get; private set; } = new List<Color>
         {
             Color.white,
             Color.red,
