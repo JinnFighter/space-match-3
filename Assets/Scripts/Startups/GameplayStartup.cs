@@ -32,6 +32,8 @@ namespace SpaceMatch3
         [Inject]
         private TileView _tileView;
         [Inject]
+        private UiView _uiView;
+        [Inject]
         private ViewContainer _viewContainer;
 
         void Start() 
@@ -89,6 +91,7 @@ namespace SpaceMatch3
                 .Inject(_gameFieldGenerator)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
+                .Inject(_uiView)
                 .Inject(_viewContainer);
         }
 
