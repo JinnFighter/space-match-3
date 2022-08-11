@@ -49,5 +49,6 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<GameFieldModel>().AsSingle().NonLazy();
         Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
         Container.Bind<ScoreModel>().AsSingle().NonLazy();
+        Container.Bind<TurnCountModel>().AsSingle().NonLazy();
     }
 }
