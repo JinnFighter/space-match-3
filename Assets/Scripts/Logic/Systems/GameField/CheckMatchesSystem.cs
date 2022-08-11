@@ -14,36 +14,39 @@ namespace Assets.Scripts.Logic.Systems.GameField
 
         public void Run()
         {
-            var directions = new Vector2Int[4] { Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down };
-            foreach(var index in _filter)
+            if(!_filter.IsEmpty())
             {
-                var turnEvent = _filter.Get1(index);
-                foreach(var selectedTile in turnEvent.SelectedTiles)
+                var directions = new Vector2Int[4] { Vector2Int.left, Vector2Int.right, Vector2Int.up, Vector2Int.down };
+                var visitStates = new bool[_gameFieldModel.Width, _gameFieldModel.Height];
+                for (var i = 0; i < _gameFieldModel.Width; i++)
                 {
-                    var matches = FindMatches(selectedTile, directions);
-                    if(matches.Count >= 3)
+                    for (int j = 0; j < _gameFieldModel.Height; j++)
                     {
-                        _world.SendMessage(new MatchEvent { MatchPositions = matches });
+                        var matches = GetMatches(_gameFieldModel[i, j].Position, directions, visitStates);
+                        if (matches.Count >= 3)
+                        {
+                            _world.SendMessage(new MatchEvent { MatchPositions = matches });
+                        }
                     }
                 }
             }
         }
 
-        private List<Vector2Int> FindMatches(Vector2Int startPosition, Vector2Int[] directions)
+        private List<Vector2Int> GetMatches(Vector2Int startPosition, Vector2Int[] directions, bool[,] visitStates)
         {
-            var matches = new List<Vector2Int> { startPosition };
-
-            foreach(var direction in directions)
-            {
+           var matches = new List<Vector2Int> { startPosition };
+           visitStates[startPosition.x, startPosition.y] = true;
+           
+           foreach(var direction in directions)
+           {
                 var currentPosition = startPosition + direction;
-                while (_gameFieldModel.IsInside(currentPosition) && (_gameFieldModel[currentPosition].State == _gameFieldModel[startPosition].State))
+                if(_gameFieldModel.IsInside(currentPosition) && !visitStates[currentPosition.x, currentPosition.y] && _gameFieldModel[currentPosition].State == _gameFieldModel[startPosition].State)
                 {
-                    matches.Add(currentPosition);
-                    currentPosition += direction;
+                    matches.AddRange(GetMatches(currentPosition, directions, visitStates));
                 }
-            }
+           }
 
-            return matches;
+           return matches;
         }
     }
 }
