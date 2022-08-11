@@ -12,7 +12,6 @@ public class GameplayInstaller : MonoInstaller
     [SerializeField] private GameFieldView _gameFieldView;
     [SerializeField] private TileView _tileView;
 
-    [SerializeField] private UiView _uiView;
     [SerializeField] private ViewContainer _viewContainer;
 
     public override void InstallBindings()
@@ -32,7 +31,6 @@ public class GameplayInstaller : MonoInstaller
     private void BindScene()
     {
         Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
-        Container.Bind<UiView>().FromInstance(_uiView).AsSingle();
     }
 
     private void BindPrefabs()
