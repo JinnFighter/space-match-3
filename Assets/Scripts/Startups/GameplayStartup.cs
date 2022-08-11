@@ -1,6 +1,7 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems.GameField;
@@ -30,6 +31,8 @@ namespace SpaceMatch3
         private TurnCountModel _turnCountModel;
         [Inject]
         private IGameFieldGenerator _gameFieldGenerator;
+        [Inject]
+        private TileColorsDescription _tileColorsDescription;
         [Inject]
         private GameFieldView _gameFieldView;
         [Inject]
@@ -99,6 +102,7 @@ namespace SpaceMatch3
                 .Inject(_scoreModel)
                 .Inject(_turnCountModel)
                 .Inject(_gameFieldGenerator)
+                .Inject(_tileColorsDescription)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
                 .Inject(_gameOverView)
