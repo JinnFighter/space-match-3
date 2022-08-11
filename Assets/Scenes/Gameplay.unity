@@ -931,6 +931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d0f7ffd699f8248864b2e49c953625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameOverView: {fileID: 685606445}
 --- !u!4 &1734224750
 Transform:
   m_ObjectHideFlags: 0
@@ -958,6 +959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1b419b34307804ebff31a59e7a4711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BackgroundCanvas>k__BackingField: {fileID: 1090710001}
   <GameplayCanvas>k__BackingField: {fileID: 1986742164}
   <UiCanvas>k__BackingField: {fileID: 1742511367}
   <PopupCanvas>k__BackingField: {fileID: 1048644095}

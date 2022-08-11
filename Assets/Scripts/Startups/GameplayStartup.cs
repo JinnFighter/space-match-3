@@ -37,6 +37,8 @@ namespace SpaceMatch3
         [Inject]
         private ViewContainer _viewContainer;
 
+        [SerializeField] private GameOverView _gameOverView;
+
         void Start() 
         {   
             _world = new EcsWorld();
@@ -98,6 +100,7 @@ namespace SpaceMatch3
                 .Inject(_gameFieldGenerator)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
+                .Inject(_gameOverView)
                 .Inject(_viewContainer);
         }
 
