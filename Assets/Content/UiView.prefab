@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4412384065786427254}
   - component: {fileID: 7357609951100918713}
-  - component: {fileID: 1813323746748680299}
-  - component: {fileID: 2478517969569923827}
   m_Layer: 5
   m_Name: TurnCountView
   m_TagString: Untagged
@@ -53,34 +51,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _turnCountText: {fileID: 391971306968813099}
---- !u!114 &1813323746748680299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062749976682286809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  convertMode: 0
---- !u!114 &2478517969569923827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062749976682286809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fd1a4c51edb7f4b82037b6c5971249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  value:
-    TurnCount: 0
-    TurnCountView: {fileID: 7357609951100918713}
 --- !u!1 &2981005268253920882
 GameObject:
   m_ObjectHideFlags: 0
