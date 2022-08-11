@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,7 +6,6 @@ namespace Assets.Scripts.Logic.Views
 {
     public class TileView : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private TextMeshProUGUI _stateText;
         [SerializeField] private Image _stateImage;
         [SerializeField] private Image _ballImage;
 
@@ -27,7 +25,6 @@ namespace Assets.Scripts.Logic.Views
 
         public bool IsClicked;
 
-        public void SetState(int state) => _stateText.text = state >= 0 ? $"{state}" : "-";
         public void SetColor(Color color) => _ballImage.color = color;
 
         public void EnableBall() => BallGameObject.SetActive(true);

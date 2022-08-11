@@ -50,7 +50,7 @@ namespace SpaceMatch3
             #if UNITY_EDITOR
                 Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create(_world);
                 Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
-#endif
+            #endif
 
             AddExtensions();
             AddInitSystems();

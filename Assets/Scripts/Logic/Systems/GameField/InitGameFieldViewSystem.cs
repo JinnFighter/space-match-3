@@ -1,4 +1,5 @@
 using Assets.Scripts.Logic.Components.Tiles;
+using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
         private readonly GameFieldModel _gameFieldModel = null;
         private readonly GameFieldView _gameFieldView = null;
         private readonly TileView _tilePrefab = null;
+        private readonly TileColorsDescription _tileColorsDescription = null;
 
         public void Init()
         {
@@ -25,7 +27,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
                     ref var tile = ref tileEntity.Get<Tile>();
                     tile.Position = new Vector2Int(i, j);
                     tile.State = _gameFieldModel[tile.Position].State;
-                    tileView.SetState(tile.State);
+                    tileView.SetColor(_tileColorsDescription[tile.State]);
                     ref var tileViewContainer = ref tileEntity.Get<TileViewContainer>();
                     tileViewContainer.TileView = tileView;
                 }
