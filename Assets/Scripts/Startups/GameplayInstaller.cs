@@ -2,11 +2,13 @@ using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
+using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
+using System;
 using UnityEngine;
 using Zenject;
 
-public class GameplayInstaller : MonoInstaller
+public class GameplayInstaller : MonoInstaller, IInitializable, IDisposable
 {
     [SerializeField] private GameFieldDescription _gameFieldDescription;
     [SerializeField] private TileColorsDescription _tileColorsDescription;
@@ -15,6 +17,8 @@ public class GameplayInstaller : MonoInstaller
     [SerializeField] private TileView _tileView;
 
     [SerializeField] private ViewContainer _viewContainer;
+
+    private PresenterContainer _presenterContainer = new();
 
     public override void InstallBindings()
     {
@@ -53,5 +57,16 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
         Container.Bind<ScoreModel>().AsSingle().NonLazy();
         Container.Bind<TurnCountModel>().AsSingle().NonLazy();
+    }
+
+    public void Initialize()
+    {
+        _presenterContainer.Enable();
+    }
+
+    public void Dispose()
+    {
+        _presenterContainer.Disable();
+        _presenterContainer.Clear();
     }
 }
