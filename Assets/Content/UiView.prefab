@@ -205,6 +205,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7948844924486742448}
   - component: {fileID: 1002573168055883259}
+  - component: {fileID: 5447104050323872051}
+  - component: {fileID: 7964427847092164776}
   m_Layer: 5
   m_Name: ScoreView
   m_TagString: Untagged
@@ -246,3 +248,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 662791914904336322}
+--- !u!114 &5447104050323872051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4879611453245359890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863c7f7460b2b49abb4fa9a7ff9cb180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  convertMode: 0
+--- !u!114 &7964427847092164776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4879611453245359890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94397814a8d08774d854a95895722a86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value:
+    ScoreView: {fileID: 1002573168055883259}

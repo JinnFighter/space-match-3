@@ -7,6 +7,6 @@ namespace Assets.Scripts.Logic.Views
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
 
-        public void SetScore(int score) => _scoreText.text = $"{ score }";
+        public void SetScore(int score) => _scoreText.text = $"Score: { score }";
     }
 }
