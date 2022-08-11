@@ -6,6 +6,7 @@ using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Systems.Gameplay;
 using Assets.Scripts.Logic.Systems.Tiles;
+using Assets.Scripts.Logic.Systems.Ui;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace SpaceMatch3
         private GameFieldModel _gameFieldModel;
         [Inject]
         private TileSelectionModel _tileSelectionModel;
+        [Inject]
+        private ScoreModel _scoreModel;
         [Inject]
         private IGameFieldGenerator _gameFieldGenerator;
         [Inject]
@@ -73,9 +76,11 @@ namespace SpaceMatch3
                 .Add(new CreateMatchRequestOnTurnSystem())
                 .Add(new CheckMatchesSystem())
                 .Add(new ClearMatchedTileSystem())
+                .Add(new AddScoreOnMatchSystem())
                 .Add(new ShiftTilesSystem())
                 .Add(new UpdateTileStatesSystem())
-                .Add(new UpdateTileSelectionSystem());
+                .Add(new UpdateTileSelectionSystem())
+                .Add(new UpdateScoreViewSystem());
         }
 
         private void AddInjections()
@@ -83,6 +88,7 @@ namespace SpaceMatch3
             _systems
                 .Inject(_gameFieldModel)
                 .Inject(_tileSelectionModel)
+                .Inject(_scoreModel)
                 .Inject(_gameFieldGenerator)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)

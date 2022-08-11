@@ -1,9 +1,7 @@
 using Assets.Scripts.Common;
-using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Views;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +11,7 @@ public class GameplayInstaller : MonoInstaller
 
     [SerializeField] private GameFieldView _gameFieldView;
     [SerializeField] private TileView _tileView;
+
     [SerializeField] private ViewContainer _viewContainer;
 
     public override void InstallBindings()
@@ -32,11 +31,11 @@ public class GameplayInstaller : MonoInstaller
     private void BindScene()
     {
         Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
+        Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
     }
 
     private void BindPrefabs()
     {
-        Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
         Container.Bind<TileView>().FromInstance(_tileView).AsTransient();
     }
 
@@ -49,5 +48,6 @@ public class GameplayInstaller : MonoInstaller
     {
         Container.Bind<GameFieldModel>().AsSingle().NonLazy();
         Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
+        Container.Bind<ScoreModel>().AsSingle().NonLazy();
     }
 }
