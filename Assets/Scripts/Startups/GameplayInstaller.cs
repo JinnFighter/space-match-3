@@ -2,6 +2,7 @@ using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
+using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
 using UnityEngine;
 using Zenject;
@@ -13,6 +14,7 @@ public class GameplayInstaller : MonoInstaller
 
     [SerializeField] private GameFieldView _gameFieldView;
     [SerializeField] private TileView _tileView;
+    [SerializeField] private UiView _uiView;
 
     [SerializeField] private ViewContainer _viewContainer;
 
@@ -23,6 +25,15 @@ public class GameplayInstaller : MonoInstaller
         BindHelpers();
         BindPrefabs();
         BindScene();
+        BindPresenters();
+    }
+
+    private void BindPresenters()
+    {
+        Container.Bind<ScorePresenter>().AsSingle();
+        Container.Bind<TurnCountPresenter>().AsSingle();
+
+        Container.Bind<PresenterContainer>().AsSingle();
     }
 
     private void BindHelpers()
@@ -34,6 +45,8 @@ public class GameplayInstaller : MonoInstaller
     {
         Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
         Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
+        Container.Bind<ScoreView>().FromInstance(_uiView.ScoreView).AsSingle();
+        Container.Bind<TurnCountView>().FromInstance(_uiView.TurnCountView).AsSingle();
     }
 
     private void BindPrefabs()

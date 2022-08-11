@@ -241,6 +241,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d39d6234b21f8e04a9902e35289965e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &377888486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3890097594829805222, guid: 09d7608ea6fcefc4eaa1f67d91a56d80, type: 3}
+  m_PrefabInstance: {fileID: 3890097595024211647}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4461db0f4eda2f4aac18d3b6031f65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &567752238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1460,7 @@ MonoBehaviour:
   _tileColorsDescription: {fileID: 11400000, guid: 0d4f9251b330e5e41a8132726eeaad83, type: 2}
   _gameFieldView: {fileID: 351972407}
   _tileView: {fileID: 4804012768253041941, guid: 991f99147b6f7544687c260d06a4d45f, type: 3}
+  _uiView: {fileID: 377888486}
   _viewContainer: {fileID: 1734224751}
 --- !u!1001 &3890097595024211647
 PrefabInstance:

@@ -4,6 +4,7 @@ using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
+using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Systems.Gameplay;
 using Assets.Scripts.Logic.Systems.Tiles;
@@ -20,6 +21,9 @@ namespace SpaceMatch3
     {
         private EcsWorld _world;
         private EcsSystems _systems;
+
+        [Inject]
+        private PresenterContainer _presenterContainer;
 
         [Inject]
         private GameFieldModel _gameFieldModel;
@@ -59,6 +63,11 @@ namespace SpaceMatch3
             AddInjections();
 
             _systems.Init();
+
+            foreach(var presenter in _presenterContainer)
+            {
+                presenter.Enable();
+            }
         }
 
         private void AddExtensions()
@@ -89,8 +98,6 @@ namespace SpaceMatch3
                 .Add(new ShiftTilesSystem())
                 .Add(new UpdateTileStatesSystem())
                 .Add(new UpdateTileSelectionSystem())
-                .Add(new UpdateScoreViewSystem())
-                .Add(new UpdateTurnCountViewSystem())
                 .Add(new EnableGameOverViewSystem());
         }
 
@@ -123,6 +130,11 @@ namespace SpaceMatch3
 
         void OnDestroy() 
         {
+            foreach (var presenter in _presenterContainer)
+            {
+                presenter.Disable();
+            }
+
             if (_systems != null) 
             {
                 _systems.Destroy();
