@@ -4,21 +4,19 @@ using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
-using System;
 using UnityEngine;
 using Zenject;
 
-public class GameplayInstaller : MonoInstaller, IInitializable, IDisposable
+public class GameplayInstaller : MonoInstaller
 {
     [SerializeField] private GameFieldDescription _gameFieldDescription;
     [SerializeField] private TileColorsDescription _tileColorsDescription;
 
     [SerializeField] private GameFieldView _gameFieldView;
     [SerializeField] private TileView _tileView;
+    [SerializeField] private UiView _uiView;
 
     [SerializeField] private ViewContainer _viewContainer;
-
-    private PresenterContainer _presenterContainer = new();
 
     public override void InstallBindings()
     {
@@ -27,6 +25,14 @@ public class GameplayInstaller : MonoInstaller, IInitializable, IDisposable
         BindHelpers();
         BindPrefabs();
         BindScene();
+        BindPresenters();
+    }
+
+    private void BindPresenters()
+    {
+        Container.Bind<ScorePresenter>().AsSingle();
+
+        Container.Bind<PresenterContainer>().AsSingle();
     }
 
     private void BindHelpers()
@@ -38,6 +44,7 @@ public class GameplayInstaller : MonoInstaller, IInitializable, IDisposable
     {
         Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
         Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
+        Container.Bind<ScoreView>().FromInstance(_uiView.ScoreView).AsSingle();
     }
 
     private void BindPrefabs()
@@ -57,16 +64,5 @@ public class GameplayInstaller : MonoInstaller, IInitializable, IDisposable
         Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
         Container.Bind<ScoreModel>().AsSingle().NonLazy();
         Container.Bind<TurnCountModel>().AsSingle().NonLazy();
-    }
-
-    public void Initialize()
-    {
-        _presenterContainer.Enable();
-    }
-
-    public void Dispose()
-    {
-        _presenterContainer.Disable();
-        _presenterContainer.Clear();
     }
 }

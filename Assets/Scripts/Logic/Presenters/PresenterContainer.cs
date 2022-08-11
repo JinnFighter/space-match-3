@@ -1,29 +1,22 @@
+using System.Collections;
 using System.Collections.Generic;
+using Zenject;
 
 namespace Assets.Scripts.Logic.Presenters
 {
-    public class PresenterContainer
+    public class PresenterContainer : IEnumerable<IPresenter>
     {
-        private readonly List<IPresenter> _presenters = new();
+        [Inject]
+        private readonly ScorePresenter _scorePresenter;
 
-        public void Add(IPresenter presenter) => _presenters.Add(presenter);
-
-        public void Disable()
+        public IEnumerator<IPresenter> GetEnumerator()
         {
-            foreach (var presenter in _presenters)
-            {
-                presenter.Disable();
-            }
+            yield return _scorePresenter;
         }
 
-        public void Enable()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            foreach(var presenter in _presenters)
-            {
-                presenter.Enable();
-            }
+            return GetEnumerator();
         }
-
-        public void Clear() => _presenters.Clear();
     }
 }
