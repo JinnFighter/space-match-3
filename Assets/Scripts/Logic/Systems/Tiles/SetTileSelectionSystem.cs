@@ -3,7 +3,6 @@ using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Extensions;
 using Assets.Scripts.Logic.Models;
 using Leopotam.Ecs;
-using System;
 using UnityEngine;
 
 namespace Assets.Scripts.Logic.Systems.Tiles
@@ -14,6 +13,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
         private readonly EcsFilter<Tile, TileClicked> _filter = null;
         private readonly GameFieldModel _gameFieldModel = null;
         private readonly TileSelectionModel _tileSelectionModel = null;
+        private readonly TurnCountModel _turnCountModel = null;
 
         public void Run()
         {
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
             var selectedTile = _gameFieldModel[_tileSelectionModel.SelectedTile];
             var clickedTile = _gameFieldModel[position];
 
-            if(_gameFieldModel.IsInside(selectedTile.Position) && _gameFieldModel.IsInside(clickedTile.Position) && _gameFieldModel.IsAdjacent(selectedTile.Position, clickedTile.Position))
+            if(_gameFieldModel.IsInside(selectedTile.Position) && _gameFieldModel.IsInside(clickedTile.Position) && _gameFieldModel.IsAdjacent(selectedTile.Position, clickedTile.Position) && _turnCountModel.TurnCount > 0)
             {
                 _world.SendMessage<TurnEvent>();
                 (selectedTile.State, clickedTile.State) = (clickedTile.State, selectedTile.State);

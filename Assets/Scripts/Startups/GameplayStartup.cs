@@ -75,6 +75,7 @@ namespace SpaceMatch3
             _systems
                 .Add(new CheckTileClickedSystem())
                 .Add(new SetTileSelectionSystem())
+                .Add(new UpdateTurnCountSystem())
                 .Add(new CreateMatchRequestOnTurnSystem())
                 .Add(new CheckMatchesSystem())
                 .Add(new ClearMatchedTileSystem())
