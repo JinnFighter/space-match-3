@@ -7,5 +7,6 @@ namespace Assets.Scripts.Logic.Components.Ui
     public struct ScoreViewContainer
     {
         public ScoreView ScoreView;
+        public int Score;
     }
 }

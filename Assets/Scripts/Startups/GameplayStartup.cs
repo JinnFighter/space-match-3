@@ -6,6 +6,7 @@ using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Systems.Gameplay;
 using Assets.Scripts.Logic.Systems.Tiles;
+using Assets.Scripts.Logic.Systems.Ui;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -79,7 +80,8 @@ namespace SpaceMatch3
                 .Add(new ClearMatchedTileSystem())
                 .Add(new ShiftTilesSystem())
                 .Add(new UpdateTileStatesSystem())
-                .Add(new UpdateTileSelectionSystem());
+                .Add(new UpdateTileSelectionSystem())
+                .Add(new UpdateScoreViewSystem());
         }
 
         private void AddInjections()
