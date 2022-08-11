@@ -37,6 +37,8 @@ namespace SpaceMatch3
         [Inject]
         private ViewContainer _viewContainer;
 
+        [SerializeField] private GameOverView _gameOverView;
+
         void Start() 
         {   
             _world = new EcsWorld();
@@ -67,7 +69,8 @@ namespace SpaceMatch3
             _systems
                 .OneFrame<TileClicked>()
                 .OneFrame<TurnEvent>()
-                .OneFrame<MatchEvent>();
+                .OneFrame<MatchEvent>()
+                .OneFrame<GameOverEvent>();
         }
 
         private void AddRunSystems()
@@ -84,7 +87,8 @@ namespace SpaceMatch3
                 .Add(new UpdateTileStatesSystem())
                 .Add(new UpdateTileSelectionSystem())
                 .Add(new UpdateScoreViewSystem())
-                .Add(new UpdateTurnCountViewSystem());
+                .Add(new UpdateTurnCountViewSystem())
+                .Add(new EnableGameOverViewSystem());
         }
 
         private void AddInjections()
@@ -97,6 +101,7 @@ namespace SpaceMatch3
                 .Inject(_gameFieldGenerator)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
+                .Inject(_gameOverView)
                 .Inject(_viewContainer);
         }
 

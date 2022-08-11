@@ -1,12 +1,13 @@
 using Assets.Scripts.Logic.Components.Gameplay;
+using Assets.Scripts.Logic.Extensions;
 using Assets.Scripts.Logic.Models;
 using Leopotam.Ecs;
-using UnityEngine;
 
 namespace Assets.Scripts.Logic.Systems.Gameplay
 {
     public class UpdateTurnCountSystem : IEcsRunSystem
     {
+        private readonly EcsWorld _world = null;
         private readonly EcsFilter<TurnEvent> _filter = null;
         private readonly TurnCountModel _turnCountModel = null;
 
@@ -17,7 +18,7 @@ namespace Assets.Scripts.Logic.Systems.Gameplay
                 _turnCountModel.TurnCount--;
                 if(_turnCountModel.TurnCount == 0)
                 {
-                    Debug.Log("Game Over!");
+                    _world.SendMessage<GameOverEvent>();
                 }
             }
         }
