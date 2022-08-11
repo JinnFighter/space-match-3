@@ -26,8 +26,6 @@ namespace SpaceMatch3
         [Inject]
         private IGameFieldGenerator _gameFieldGenerator;
         [Inject]
-        private GameFieldDescription _gameFieldDescription;
-        [Inject]
         private GameFieldView _gameFieldView;
         [Inject]
         private TileView _tileView;
@@ -86,7 +84,6 @@ namespace SpaceMatch3
                 .Inject(_gameFieldModel)
                 .Inject(_tileSelectionModel)
                 .Inject(_gameFieldGenerator)
-                .Inject(_gameFieldDescription)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
                 .Inject(_viewContainer);
