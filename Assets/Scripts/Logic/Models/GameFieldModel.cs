@@ -6,7 +6,10 @@ public class GameFieldModel
 
     public GameFieldModel(GameFieldDescription gameFieldDescription)
     {
+        EmptyTileState = gameFieldDescription.EmptyFieldState;
+        MaxTileState = gameFieldDescription.MaxState;
         _tiles = new TileModel[gameFieldDescription.Width, gameFieldDescription.Height];
+        
         for(var i = 0; i < gameFieldDescription.Width; i++)
         {
             for (var j = 0; j < gameFieldDescription.Height; j++)
@@ -21,6 +24,8 @@ public class GameFieldModel
         }
     }
 
+    public int EmptyTileState { get; private set; }
+    public int MaxTileState { get; private set; }
     public int Width => _tiles.GetLength(0);
     public int Height => _tiles.GetLength(1);
     public TileModel this[Vector2Int position] => _tiles[position.x, position.y];

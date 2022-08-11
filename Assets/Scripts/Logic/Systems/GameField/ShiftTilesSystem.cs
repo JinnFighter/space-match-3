@@ -1,4 +1,5 @@
 using Assets.Scripts.Logic.Components.Gameplay;
+using Assets.Scripts.Logic.Extensions;
 using Leopotam.Ecs;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,10 @@ namespace Assets.Scripts.Logic.Systems.GameField
 {
     public class ShiftTilesSystem : IEcsRunSystem
     {
+        private readonly EcsWorld _world = null;
         private readonly EcsFilter<MatchEvent> _filter = null;
+
         private readonly GameFieldModel _gameFieldModel = null;
-        private readonly GameFieldDescription _gameFieldDescription = null;
 
         public void Run()
         {
@@ -21,6 +23,8 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 {
                     ShiftTiles(tilePosition);
                 }
+
+                _world.SendMessage<CheckMatchRequest>();
             }
         }
 
@@ -31,7 +35,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
             for (int y = startPosition.y; y < _gameFieldModel.Height; y++)
             {
                 var tile = _gameFieldModel[startPosition.x, y];
-                if(tile.State == _gameFieldDescription.EmptyFieldState)
+                if(tile.State == _gameFieldModel.EmptyTileState)
                 {
                     emptyCount++;
                 }
@@ -43,7 +47,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 for (int j = 0; j < tileColumn.Count - 1; j++)
                 {
                     _gameFieldModel[tileColumn[j]].State = _gameFieldModel[tileColumn[j + 1]].State;
-                    _gameFieldModel[tileColumn[j + 1]].State = _gameFieldDescription.EmptyFieldState;
+                    _gameFieldModel[tileColumn[j + 1]].State = _gameFieldModel.EmptyTileState;
                 }
             }
 
@@ -56,7 +60,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
 
         private int GetNewState(Vector2Int position)
         {
-            var possibleCharacters = Enumerable.Range(_gameFieldDescription.EmptyFieldState + 1, _gameFieldDescription.MaxState).ToList();
+            var possibleCharacters = Enumerable.Range(_gameFieldModel.EmptyTileState + 1, _gameFieldModel.MaxTileState).ToList();
 
             if (position.x > 0)
             {
