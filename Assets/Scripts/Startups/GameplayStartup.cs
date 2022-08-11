@@ -83,7 +83,8 @@ namespace SpaceMatch3
                 .Add(new ShiftTilesSystem())
                 .Add(new UpdateTileStatesSystem())
                 .Add(new UpdateTileSelectionSystem())
-                .Add(new UpdateScoreViewSystem());
+                .Add(new UpdateScoreViewSystem())
+                .Add(new UpdateTurnCountViewSystem());
         }
 
         private void AddInjections()
