@@ -6,8 +6,14 @@ namespace Assets.Scripts.Logic.Views
 {
     public class TileView : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private Image _stateImage;
         [SerializeField] private Image _ballImage;
+
+        private Vector3 _originalBallScale;
+
+        void Awake()
+        {
+            _originalBallScale = BallTransform.localScale;
+        }
 
         private GameObject _ballGameObject;
         public GameObject BallGameObject 
@@ -23,6 +29,20 @@ namespace Assets.Scripts.Logic.Views
             } 
         }
 
+        private Transform _ballTransform;
+        public Transform BallTransform
+        {
+            get
+            {
+                if (_ballTransform == null)
+                {
+                    _ballTransform = _ballImage.transform;
+                }
+
+                return _ballTransform;
+            }
+        }
+
         public bool IsClicked;
 
         public void SetColor(Color color) => _ballImage.color = color;
@@ -30,9 +50,9 @@ namespace Assets.Scripts.Logic.Views
         public void EnableBall() => BallGameObject.SetActive(true);
         public void DisableBall() => BallGameObject.SetActive(false);
 
-        public void Select() => _stateImage.color = new Color(_stateImage.color.r, _stateImage.color.g, _stateImage.color.b, 1f);
+        public void Select() => BallTransform.localScale = _originalBallScale * 1.05f;
 
-        public void Deselect() => _stateImage.color = new Color(_stateImage.color.r, _stateImage.color.g, _stateImage.color.b, 0.5f);
+        public void Deselect() => BallTransform.localScale = _originalBallScale;
 
         public void OnPointerClick(PointerEventData eventData) => IsClicked = true;
 
