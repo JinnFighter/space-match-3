@@ -87,7 +87,8 @@ namespace SpaceMatch3
                 .Add(new UpdateTileStatesSystem())
                 .Add(new UpdateTileSelectionSystem())
                 .Add(new UpdateScoreViewSystem())
-                .Add(new UpdateTurnCountViewSystem());
+                .Add(new UpdateTurnCountViewSystem())
+                .Add(new EnableGameOverViewSystem());
         }
 
         private void AddInjections()
