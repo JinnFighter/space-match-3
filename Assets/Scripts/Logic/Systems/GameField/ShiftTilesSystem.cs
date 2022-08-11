@@ -1,4 +1,5 @@
 using Assets.Scripts.Logic.Components.Gameplay;
+using Assets.Scripts.Logic.Extensions;
 using Leopotam.Ecs;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,9 @@ namespace Assets.Scripts.Logic.Systems.GameField
 {
     public class ShiftTilesSystem : IEcsRunSystem
     {
+        private readonly EcsWorld _world = null;
         private readonly EcsFilter<MatchEvent> _filter = null;
+
         private readonly GameFieldModel _gameFieldModel = null;
         private readonly GameFieldDescription _gameFieldDescription = null;
 
@@ -21,6 +24,8 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 {
                     ShiftTiles(tilePosition);
                 }
+
+                _world.SendMessage<CheckMatchRequest>();
             }
         }
 
