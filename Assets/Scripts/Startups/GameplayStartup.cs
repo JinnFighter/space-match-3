@@ -27,6 +27,8 @@ namespace SpaceMatch3
         [Inject]
         private ScoreModel _scoreModel;
         [Inject]
+        private TurnCountModel _turnCountModel;
+        [Inject]
         private IGameFieldGenerator _gameFieldGenerator;
         [Inject]
         private GameFieldView _gameFieldView;
@@ -89,6 +91,7 @@ namespace SpaceMatch3
                 .Inject(_gameFieldModel)
                 .Inject(_tileSelectionModel)
                 .Inject(_scoreModel)
+                .Inject(_turnCountModel)
                 .Inject(_gameFieldGenerator)
                 .Inject(_gameFieldView)
                 .Inject(_tileView)
