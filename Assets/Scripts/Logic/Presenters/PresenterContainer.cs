@@ -8,10 +8,13 @@ namespace Assets.Scripts.Logic.Presenters
     {
         [Inject]
         private readonly ScorePresenter _scorePresenter;
+        [Inject]
+        private readonly TurnCountPresenter _turnCountPresenter;
 
         public IEnumerator<IPresenter> GetEnumerator()
         {
             yield return _scorePresenter;
+            yield return _turnCountPresenter;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

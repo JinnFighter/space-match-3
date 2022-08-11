@@ -31,6 +31,7 @@ public class GameplayInstaller : MonoInstaller
     private void BindPresenters()
     {
         Container.Bind<ScorePresenter>().AsSingle();
+        Container.Bind<TurnCountPresenter>().AsSingle();
 
         Container.Bind<PresenterContainer>().AsSingle();
     }
@@ -45,6 +46,7 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
         Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
         Container.Bind<ScoreView>().FromInstance(_uiView.ScoreView).AsSingle();
+        Container.Bind<TurnCountView>().FromInstance(_uiView.TurnCountView).AsSingle();
     }
 
     private void BindPrefabs()
