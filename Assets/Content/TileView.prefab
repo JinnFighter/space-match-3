@@ -92,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateText: {fileID: 6902750920392160728}
   _stateImage: {fileID: 6902750920082164431}
+  IsClicked: 0
 --- !u!1 &6902750920392160710
 GameObject:
   m_ObjectHideFlags: 0
