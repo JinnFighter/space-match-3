@@ -1,9 +1,7 @@
 using Assets.Scripts.Common;
-using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Views;
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -49,5 +47,6 @@ public class GameplayInstaller : MonoInstaller
     {
         Container.Bind<GameFieldModel>().AsSingle().NonLazy();
         Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
+        Container.Bind<ScoreModel>().AsSingle().NonLazy();
     }
 }
