@@ -1,4 +1,3 @@
-using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
@@ -10,14 +9,12 @@ namespace Assets.Scripts.Logic.Systems.GameField
     {
         private readonly EcsWorld _world = null;
         private readonly GameFieldModel _gameFieldModel = null;
-        private readonly ViewContainer _viewContainer = null;
-        private readonly GameFieldView _gameFieldPrefab = null;
+        private readonly GameFieldView _gameFieldView = null;
         private readonly TileView _tilePrefab = null;
 
         public void Init()
         {
-            var gameFieldView = Object.Instantiate(_gameFieldPrefab, _viewContainer.GameplayCanvas.transform);
-            var parentTransform = gameFieldView.transform;
+            var parentTransform = _gameFieldView.transform;
 
             for (int i = 0; i < _gameFieldModel.Width; i++)
             {

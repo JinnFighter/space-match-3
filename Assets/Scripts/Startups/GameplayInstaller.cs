@@ -31,11 +31,11 @@ public class GameplayInstaller : MonoInstaller
     private void BindScene()
     {
         Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
+        Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
     }
 
     private void BindPrefabs()
     {
-        Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
         Container.Bind<TileView>().FromInstance(_tileView).AsTransient();
     }
 
