@@ -4,6 +4,7 @@ using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Systems.GameField;
+using Assets.Scripts.Logic.Systems.Gameplay;
 using Assets.Scripts.Logic.Systems.Tiles;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
@@ -71,6 +72,7 @@ namespace SpaceMatch3
             _systems
                 .Add(new CheckTileClickedSystem())
                 .Add(new SetTileSelectionSystem())
+                .Add(new CreateMatchRequestOnTurnSystem())
                 .Add(new CheckMatchesSystem())
                 .Add(new ClearMatchedTileSystem())
                 .Add(new ShiftTilesSystem())
