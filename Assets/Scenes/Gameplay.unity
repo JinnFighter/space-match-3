@@ -1458,6 +1458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameFieldDescription: {fileID: 11400000, guid: 90deca66877c50e4ca37d565f90f4a96, type: 2}
   _tileColorsDescription: {fileID: 11400000, guid: 0d4f9251b330e5e41a8132726eeaad83, type: 2}
+  _levelDescription: {fileID: 11400000, guid: d663bf13fb96d8740babdfcfec55b969, type: 2}
   _gameFieldView: {fileID: 351972407}
   _tileView: {fileID: 4804012768253041941, guid: 991f99147b6f7544687c260d06a4d45f, type: 3}
   _uiView: {fileID: 377888486}

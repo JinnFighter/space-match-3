@@ -18,6 +18,7 @@ namespace Assets.Scripts.Logic.Presenters
         public void Enable()
         {
             _turnCountModel.TurnCountChanged += OnTurnCountChanged;
+            _turnCountView.SetTurnCount(_turnCountModel.TurnCount);
         }
 
         private void OnTurnCountChanged(int turnCount)
