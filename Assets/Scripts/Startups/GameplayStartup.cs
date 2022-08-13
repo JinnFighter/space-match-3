@@ -7,6 +7,7 @@ using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Systems.Gameplay;
+using Assets.Scripts.Logic.Systems.Input;
 using Assets.Scripts.Logic.Systems.Tiles;
 using Assets.Scripts.Logic.Systems.Ui;
 using Assets.Scripts.Logic.Views;
@@ -24,7 +25,8 @@ namespace SpaceMatch3
 
         [Inject]
         private PresenterContainer _presenterContainer;
-
+        [Inject]
+        private TileClickInputModel _tileClickInputModel;
         [Inject]
         private GameFieldModel _gameFieldModel;
         [Inject]
@@ -35,12 +37,6 @@ namespace SpaceMatch3
         private TurnCountModel _turnCountModel;
         [Inject]
         private IGameFieldGenerator _gameFieldGenerator;
-        [Inject]
-        private TileColorsDescription _tileColorsDescription;
-        [Inject]
-        private GameFieldView _gameFieldView;
-        [Inject]
-        private TileView _tileView;
         [Inject]
         private ViewContainer _viewContainer;
 
@@ -88,7 +84,8 @@ namespace SpaceMatch3
         private void AddRunSystems()
         {
             _systems
-                .Add(new CheckTileClickedSystem())
+                .Add(new CheckTileClickSystem())
+                .Add(new ClearInputModelsSystem())
                 .Add(new SetTileSelectionSystem())
                 .Add(new UpdateTurnCountSystem())
                 .Add(new CreateMatchRequestOnTurnSystem())
@@ -97,21 +94,18 @@ namespace SpaceMatch3
                 .Add(new AddScoreOnMatchSystem())
                 .Add(new ShiftTilesSystem())
                 .Add(new UpdateTileStatesSystem())
-                .Add(new UpdateTileSelectionSystem())
                 .Add(new EnableGameOverViewSystem());
         }
 
         private void AddInjections()
         {
             _systems
+                .Inject(_tileClickInputModel)
                 .Inject(_gameFieldModel)
                 .Inject(_tileSelectionModel)
                 .Inject(_scoreModel)
                 .Inject(_turnCountModel)
                 .Inject(_gameFieldGenerator)
-                .Inject(_tileColorsDescription)
-                .Inject(_gameFieldView)
-                .Inject(_tileView)
                 .Inject(_gameOverView)
                 .Inject(_viewContainer);
         }
@@ -119,8 +113,7 @@ namespace SpaceMatch3
         private void AddInitSystems()
         {
             _systems
-                .Add(new InitGameFieldSystem())
-                .Add(new InitGameFieldViewSystem());
+                .Add(new InitGameFieldSystem());
         }
 
         void Update() 

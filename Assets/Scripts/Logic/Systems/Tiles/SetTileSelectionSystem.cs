@@ -10,7 +10,7 @@ namespace Assets.Scripts.Logic.Systems.Tiles
     public class SetTileSelectionSystem : IEcsRunSystem
     {
         private readonly EcsWorld _world = null;
-        private readonly EcsFilter<Tile, TileClicked> _filter = null;
+        private readonly EcsFilter<TileClicked> _filter = null;
         private readonly GameFieldModel _gameFieldModel = null;
         private readonly TileSelectionModel _tileSelectionModel = null;
         private readonly TurnCountModel _turnCountModel = null;
@@ -19,23 +19,23 @@ namespace Assets.Scripts.Logic.Systems.Tiles
         {
             foreach(var index in _filter)
             {
-                var tile = _filter.Get1(index);
+                var tileClicked = _filter.Get1(index);
 
                 if(_tileSelectionModel.HasSelection)
                 {
-                    if (_tileSelectionModel.SelectedTile == tile.Position)
+                    if (_tileSelectionModel.SelectedTile == tileClicked.TilePosition)
                     {
                         Deselect();
                     }
                     else
                     {
-                        SwapStates(tile.Position);
+                        SwapStates(tileClicked.TilePosition);
                         Deselect();
                     }
                 }
                 else
                 {
-                    Select(tile.Position);
+                    Select(tileClicked.TilePosition);
                 }
             }
         }
