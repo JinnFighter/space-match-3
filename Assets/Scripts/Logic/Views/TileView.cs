@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -54,8 +55,14 @@ namespace Assets.Scripts.Logic.Views
 
         public void Deselect() => BallTransform.localScale = _originalBallScale;
 
-        public void OnPointerClick(PointerEventData eventData) => IsClicked = true;
+        public void OnPointerClick(PointerEventData eventData) 
+        { 
+            IsClicked = true;
+            ClickedEvent?.Invoke();
+        }
 
         public void ResetClicked() => IsClicked = false;
+
+        public event Action ClickedEvent;
     }
 }

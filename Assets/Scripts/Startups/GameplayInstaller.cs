@@ -4,6 +4,7 @@ using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -31,6 +32,7 @@ public class GameplayInstaller : MonoInstaller
 
     private void BindPresenters()
     {
+        Container.Bind<GameFieldPresenter>().AsSingle();
         Container.Bind<ScorePresenter>().AsSingle();
         Container.Bind<TurnCountPresenter>().AsSingle();
 
@@ -64,6 +66,7 @@ public class GameplayInstaller : MonoInstaller
 
     private void BindModels()
     {
+        Container.Bind<TileClickInputModel>().AsSingle().NonLazy();
         Container.Bind<GameFieldModel>().AsSingle().NonLazy();
         Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
         Container.Bind<ScoreModel>().AsSingle().NonLazy();
