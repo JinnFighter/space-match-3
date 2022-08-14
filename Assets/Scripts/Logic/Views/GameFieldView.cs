@@ -5,8 +5,8 @@ namespace Assets.Scripts.Logic.Views
 {
     public class GameFieldView : MonoBehaviour
     {
-        [SerializeField] private FlexibleGridLayout _layout;
+        [field: SerializeField] public FlexibleGridLayout Layout{ get; private set; }
 
-        public void SetWidth(int width) => _layout.constrainChildrenSizeToSizeAtCount = width;
+        public void SetWidth(int width) => Layout.constrainChildrenSizeToSizeAtCount = width;
     }
 }
