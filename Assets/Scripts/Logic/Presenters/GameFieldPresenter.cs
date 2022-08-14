@@ -34,12 +34,13 @@ namespace Assets.Scripts.Logic.Presenters
         public void Enable()
         {
             _presenters = new IPresenter[_gameFieldModel.Width, _gameFieldModel.Height];
+            var layoutTransform = _gameFieldView.Layout.transform;
 
             for (int i = 0; i < _gameFieldModel.Width; i++)
             {
                 for (int j = 0; j < _gameFieldModel.Height; j++)
                 {
-                    var view = Object.Instantiate(_tilePrefab, _gameFieldView.transform);
+                    var view = Object.Instantiate(_tilePrefab, layoutTransform);
 
                     var presenter = new TilePresenter(_gameFieldModel[i, j], _tileClickInputModel, _gameFieldDescription, _tileColorsDescription, view);
                     _presenters[i, j] = presenter;

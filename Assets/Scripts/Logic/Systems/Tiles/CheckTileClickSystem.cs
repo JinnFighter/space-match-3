@@ -9,10 +9,11 @@ namespace Assets.Scripts.Logic.Systems.Tiles
     {
         private readonly EcsWorld _world = null;
         private readonly TileClickInputModel _tileClickInputModel = null;
+        private readonly TurnCountModel _turnCountModel = null;
 
         public void Run()
         {
-            if(_tileClickInputModel.HasNewInput)
+            if(_turnCountModel.TurnCount > 0 && _tileClickInputModel.HasNewInput)
             {
                 _world.SendMessage(new TileClicked { TilePosition = _tileClickInputModel.ClickedTilePosition });
             }
