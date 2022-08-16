@@ -4,72 +4,76 @@ using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
-using System;
+using Logic.MatchCheckers;
 using UnityEngine;
 using Zenject;
 
-public class GameplayInstaller : MonoInstaller
+namespace Startups
 {
-    [SerializeField] private GameFieldDescription _gameFieldDescription;
-    [SerializeField] private TileColorsDescription _tileColorsDescription;
-    [SerializeField] private LevelDescription _levelDescription;
-
-    [SerializeField] private GameFieldView _gameFieldView;
-    [SerializeField] private TileView _tileView;
-    [SerializeField] private UiView _uiView;
-
-    [SerializeField] private ViewContainer _viewContainer;
-
-    public override void InstallBindings()
+    public class GameplayInstaller : MonoInstaller
     {
-        BindDescriptions();
-        BindModels();
-        BindHelpers();
-        BindPrefabs();
-        BindScene();
-        BindPresenters();
-    }
+        [SerializeField] private GameFieldDescription _gameFieldDescription;
+        [SerializeField] private TileColorsDescription _tileColorsDescription;
+        [SerializeField] private LevelDescription _levelDescription;
 
-    private void BindPresenters()
-    {
-        Container.Bind<GameFieldPresenter>().AsSingle();
-        Container.Bind<ScorePresenter>().AsSingle();
-        Container.Bind<TurnCountPresenter>().AsSingle();
+        [SerializeField] private GameFieldView _gameFieldView;
+        [SerializeField] private TileView _tileView;
+        [SerializeField] private UiView _uiView;
 
-        Container.Bind<PresenterContainer>().AsSingle();
-    }
+        [SerializeField] private ViewContainer _viewContainer;
 
-    private void BindHelpers()
-    {
-        Container.Bind<IGameFieldGenerator>().To<RandomGameFieldGenerator>().AsTransient().NonLazy();
-    }
+        public override void InstallBindings()
+        {
+            BindDescriptions();
+            BindModels();
+            BindHelpers();
+            BindPrefabs();
+            BindScene();
+            BindPresenters();
+        }
 
-    private void BindScene()
-    {
-        Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
-        Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
-        Container.Bind<ScoreView>().FromInstance(_uiView.ScoreView).AsSingle();
-        Container.Bind<TurnCountView>().FromInstance(_uiView.TurnCountView).AsSingle();
-    }
+        private void BindPresenters()
+        {
+            Container.Bind<GameFieldPresenter>().AsSingle();
+            Container.Bind<ScorePresenter>().AsSingle();
+            Container.Bind<TurnCountPresenter>().AsSingle();
 
-    private void BindPrefabs()
-    {
-        Container.Bind<TileView>().FromInstance(_tileView).AsTransient();
-    }
+            Container.Bind<PresenterContainer>().AsSingle();
+        }
 
-    private void BindDescriptions()
-    {
-        Container.Bind<GameFieldDescription>().FromScriptableObject(_gameFieldDescription).AsSingle();
-        Container.Bind<TileColorsDescription>().FromScriptableObject(_tileColorsDescription).AsSingle();
-        Container.Bind<LevelDescription>().FromScriptableObject(_levelDescription).AsSingle();
-    }
+        private void BindHelpers()
+        {
+            Container.Bind<IGameFieldGenerator>().To<RandomGameFieldGenerator>().AsTransient().NonLazy();
+            Container.Bind<IMatchChecker>().To<MatchChecker>().AsSingle();
+        }
 
-    private void BindModels()
-    {
-        Container.Bind<TileClickInputModel>().AsSingle().NonLazy();
-        Container.Bind<GameFieldModel>().AsSingle().NonLazy();
-        Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
-        Container.Bind<ScoreModel>().AsSingle().NonLazy();
-        Container.Bind<TurnCountModel>().AsSingle().NonLazy();
+        private void BindScene()
+        {
+            Container.Bind<ViewContainer>().FromInstance(_viewContainer).AsSingle();
+            Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
+            Container.Bind<ScoreView>().FromInstance(_uiView.ScoreView).AsSingle();
+            Container.Bind<TurnCountView>().FromInstance(_uiView.TurnCountView).AsSingle();
+        }
+
+        private void BindPrefabs()
+        {
+            Container.Bind<TileView>().FromInstance(_tileView).AsTransient();
+        }
+
+        private void BindDescriptions()
+        {
+            Container.Bind<GameFieldDescription>().FromScriptableObject(_gameFieldDescription).AsSingle();
+            Container.Bind<TileColorsDescription>().FromScriptableObject(_tileColorsDescription).AsSingle();
+            Container.Bind<LevelDescription>().FromScriptableObject(_levelDescription).AsSingle();
+        }
+
+        private void BindModels()
+        {
+            Container.Bind<TileClickInputModel>().AsSingle().NonLazy();
+            Container.Bind<GameFieldModel>().AsSingle().NonLazy();
+            Container.Bind<TileSelectionModel>().AsSingle().NonLazy();
+            Container.Bind<ScoreModel>().AsSingle().NonLazy();
+            Container.Bind<TurnCountModel>().AsSingle().NonLazy();
+        }
     }
 }
