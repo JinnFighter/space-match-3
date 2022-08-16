@@ -1,7 +1,6 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
-using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
@@ -12,33 +11,28 @@ using Assets.Scripts.Logic.Systems.Tiles;
 using Assets.Scripts.Logic.Systems.Ui;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
+using Logic.MatchCheckers;
+using Logic.Systems.Tiles;
 using UnityEngine;
 using Voody.UniLeo;
 using Zenject;
 
-namespace SpaceMatch3
+namespace Startups
 {
-    sealed class GameplayStartup : MonoBehaviour 
+    internal sealed class GameplayStartup : MonoBehaviour 
     {
         private EcsWorld _world;
         private EcsSystems _systems;
 
-        [Inject]
-        private PresenterContainer _presenterContainer;
-        [Inject]
-        private TileClickInputModel _tileClickInputModel;
-        [Inject]
-        private GameFieldModel _gameFieldModel;
-        [Inject]
-        private TileSelectionModel _tileSelectionModel;
-        [Inject]
-        private ScoreModel _scoreModel;
-        [Inject]
-        private TurnCountModel _turnCountModel;
-        [Inject]
-        private IGameFieldGenerator _gameFieldGenerator;
-        [Inject]
-        private ViewContainer _viewContainer;
+        [Inject] private PresenterContainer _presenterContainer;
+        [Inject] private TileClickInputModel _tileClickInputModel;
+        [Inject] private GameFieldModel _gameFieldModel;
+        [Inject] private TileSelectionModel _tileSelectionModel;
+        [Inject] private ScoreModel _scoreModel;
+        [Inject] private TurnCountModel _turnCountModel;
+        [Inject] private IGameFieldGenerator _gameFieldGenerator;
+        [Inject] private IMatchChecker _matchChecker;
+        [Inject] private ViewContainer _viewContainer;
 
         [SerializeField] private GameOverView _gameOverView;
 
@@ -106,6 +100,7 @@ namespace SpaceMatch3
                 .Inject(_scoreModel)
                 .Inject(_turnCountModel)
                 .Inject(_gameFieldGenerator)
+                .Inject(_matchChecker)
                 .Inject(_gameOverView)
                 .Inject(_viewContainer);
         }
