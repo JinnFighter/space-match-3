@@ -44,8 +44,6 @@ namespace Logic.Views
             }
         }
 
-        public bool IsClicked;
-
         public void SetColor(Color color) => _ballImage.color = color;
 
         public void EnableBall() => BallGameObject.SetActive(true);
@@ -56,12 +54,9 @@ namespace Logic.Views
         public void Deselect() => BallTransform.localScale = _originalBallScale;
 
         public void OnPointerClick(PointerEventData eventData) 
-        { 
-            IsClicked = true;
+        {
             ClickedEvent?.Invoke();
         }
-
-        public void ResetClicked() => IsClicked = false;
 
         public event Action ClickedEvent;
     }
