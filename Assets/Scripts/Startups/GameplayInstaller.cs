@@ -9,6 +9,7 @@ using Logic.MatchCheckers;
 using Logic.Models;
 using Logic.Presenters;
 using Logic.Views;
+using Startups.LogicContainers;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +26,7 @@ namespace Startups
         [SerializeField] private UiView _uiView;
 
         [SerializeField] private ViewContainer _viewContainer;
+        [SerializeField] private GameOverView _gameOverView;
 
         public override void InstallBindings()
         {
@@ -34,6 +36,13 @@ namespace Startups
             BindPrefabs();
             BindScene();
             BindPresenters();
+            BindLogicContainers();
+        }
+
+        private void BindLogicContainers()
+        {
+            Container.Bind<EcsLogicContainer>().AsSingle();
+            Container.Bind<PresenterLogicContainer>().AsSingle();
         }
 
         private void BindPresenters()
@@ -57,6 +66,7 @@ namespace Startups
             Container.Bind<GameFieldView>().FromInstance(_gameFieldView).AsTransient();
             Container.Bind<ScoreView>().FromInstance(_uiView.ScoreView).AsSingle();
             Container.Bind<TurnCountView>().FromInstance(_uiView.TurnCountView).AsSingle();
+            Container.Bind<GameOverView>().FromInstance(_gameOverView).AsSingle();
         }
 
         private void BindPrefabs()
