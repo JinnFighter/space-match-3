@@ -1,12 +1,11 @@
-using Assets.Scripts.Logic.Components.Tiles;
-using Assets.Scripts.Logic.Generators;
 using Leopotam.Ecs;
+using Logic.Generators;
+using Logic.Models;
 
-namespace Assets.Scripts.Logic.Systems.GameField
+namespace Logic.Systems.GameField
 {
     public class InitGameFieldSystem : IEcsInitSystem
     {
-        private readonly EcsWorld _world = null;
         private readonly GameFieldModel _gameFieldModel = null;
         private readonly IGameFieldGenerator _gameFieldGenerator = null;
 
@@ -19,13 +18,8 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 for (var j = 0; j < _gameFieldModel.Height; j++)
                 {
                     var tileModel = _gameFieldModel[i, j];
-
-                    tileModel.State = gameField[i, j];
-
-                    var tileEntity = _world.NewEntity();
-                    ref var tile = ref tileEntity.Get<Tile>();
-                    tile.Position = tileModel.Position;
-                    tile.State = tileModel.State;
+                    
+                    tileModel.Color = gameField[i, j];
                 }
             }
         }

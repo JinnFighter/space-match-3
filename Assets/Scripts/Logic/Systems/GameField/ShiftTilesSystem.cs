@@ -2,7 +2,8 @@ using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Extensions;
 using Leopotam.Ecs;
 using System.Collections.Generic;
-using System.Linq;
+using Assets.Scripts.Logic.Descriptions;
+using Logic.Models;
 using UnityEngine;
 
 namespace Assets.Scripts.Logic.Systems.GameField
@@ -13,6 +14,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
         private readonly EcsFilter<MatchEvent> _filter = null;
 
         private readonly GameFieldModel _gameFieldModel = null;
+        private readonly TileColorsDescription _tileColorsDescription = null;
 
         public void Run()
         {
@@ -30,17 +32,17 @@ namespace Assets.Scripts.Logic.Systems.GameField
         private void ShiftTilesDown(int y)
         {
             var emptyCount = 0;
-            var validStates = new Stack<int>();
+            var validColors = new Stack<Color>();
             for (var x = 0; x < _gameFieldModel.Height; x++)
             {
                 var tile = _gameFieldModel[x, y];
-                if(tile.State == _gameFieldModel.EmptyTileState)
+                if (tile.HasBall)
                 {
-                    emptyCount++;
+                    validColors.Push(tile.Color);
                 }
                 else
                 {
-                    validStates.Push(tile.State);
+                    emptyCount++;
                 }
             }
 
@@ -49,34 +51,43 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 for (var x = _gameFieldModel.Height - 1; x > 0; x--)
                 {
                     var tile = _gameFieldModel[x, y];
-                    tile.State = validStates.Count > 0 ? validStates.Pop() : _gameFieldModel.EmptyTileState;
+                    if (validColors.Count > 0)
+                    {
+                        tile.Color = validColors.Pop();
+                        tile.HasBall = true;
+                    }
+                    else
+                    {
+                        tile.HasBall = false;
+                    }
                 }
 
                 for (var i = 0; i < emptyCount; i++)
                 {
                     var tile = _gameFieldModel[i, y];
-                    tile.State = GetNewState(tile.Position);
+                    tile.Color = GetNewColor(tile.Position);
+                    tile.HasBall = true;
                 }
             }
         }
 
-        private int GetNewState(Vector2Int position)
+        private Color GetNewColor(Vector2Int position)
         {
-            var possibleCharacters = Enumerable.Range(_gameFieldModel.EmptyTileState + 1, _gameFieldModel.MaxTileState).ToList();
+            var possibleCharacters = new List<Color>(_tileColorsDescription.Colors);
 
             if (position.x > 0)
             {
-                possibleCharacters.Remove(_gameFieldModel[position.x - 1, position.y].State);
+                possibleCharacters.Remove(_gameFieldModel[position.x - 1, position.y].Color);
             }
 
             if (position.x < _gameFieldModel.Width - 1)
             {
-                possibleCharacters.Remove(_gameFieldModel[position.x + 1, position.y].State);
+                possibleCharacters.Remove(_gameFieldModel[position.x + 1, position.y].Color);
             }
 
             if (position.y > 0)
             {
-                possibleCharacters.Remove(_gameFieldModel[position.x, position.y - 1].State);
+                possibleCharacters.Remove(_gameFieldModel[position.x, position.y - 1].Color);
             }
 
             return possibleCharacters[Random.Range(0, possibleCharacters.Count)];

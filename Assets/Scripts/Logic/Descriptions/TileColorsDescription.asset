@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ff9acf6bd28c449b9cdde2c64133bf, type: 3}
   m_Name: TileColorsDescription
   m_EditorClassIdentifier: 
-  <DefaultColor>k__BackingField: {r: 255, g: 255, b: 255, a: 0}
-  <Color>k__BackingField: []
+  <DefaultColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+  <Colors>k__BackingField:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}

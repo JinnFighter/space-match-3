@@ -1,10 +1,14 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Descriptions;
-using Assets.Scripts.Logic.Generators;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
+using Logic.Descriptions;
+using Logic.Generators;
 using Logic.MatchCheckers;
+using Logic.Models;
+using Logic.Presenters;
+using Logic.Views;
 using UnityEngine;
 using Zenject;
 

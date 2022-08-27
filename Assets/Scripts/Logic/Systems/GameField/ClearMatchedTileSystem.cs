@@ -1,7 +1,8 @@
 using Assets.Scripts.Logic.Components.Gameplay;
 using Leopotam.Ecs;
+using Logic.Models;
 
-namespace Assets.Scripts.Logic.Systems.GameField
+namespace Logic.Systems.GameField
 {
     public class ClearMatchedTileSystem : IEcsRunSystem
     {
@@ -15,7 +16,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
                 var matchEvent = _filter.Get1(index);
                 foreach(var matchPosition in matchEvent.MatchPositions)
                 {
-                    _gameFieldModel[matchPosition].State = _gameFieldModel.EmptyTileState;
+                    _gameFieldModel[matchPosition].HasBall = false;
                 }
             }
         }

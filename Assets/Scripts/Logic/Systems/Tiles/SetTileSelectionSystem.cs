@@ -4,6 +4,7 @@ using Assets.Scripts.Logic.Extensions;
 using Assets.Scripts.Logic.Models;
 using Leopotam.Ecs;
 using Logic.MatchCheckers;
+using Logic.Models;
 using UnityEngine;
 
 namespace Logic.Systems.Tiles
@@ -50,13 +51,13 @@ namespace Logic.Systems.Tiles
             if(_gameFieldModel.IsAdjacent(selectedTile.Position, clickedTile.Position) && _turnCountModel.TurnCount > 0)
             {
                 var firstMatches =
-                    _matchChecker.CheckMatches(_gameFieldModel, clickedTile.Position, selectedTile.State);
+                    _matchChecker.CheckMatches(_gameFieldModel, clickedTile.Position, selectedTile.Color);
                 var secondMatches =
-                    _matchChecker.CheckMatches(_gameFieldModel, selectedTile.Position, clickedTile.State);
+                    _matchChecker.CheckMatches(_gameFieldModel, selectedTile.Position, clickedTile.Color);
                 if (firstMatches || secondMatches)
                 {
                     _world.SendMessage<TurnEvent>();
-                    (selectedTile.State, clickedTile.State) = (clickedTile.State, selectedTile.State);
+                    (selectedTile.Color, clickedTile.Color) = (clickedTile.Color, selectedTile.Color);
                 }
             }; 
         }
