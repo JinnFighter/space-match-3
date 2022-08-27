@@ -1,3 +1,4 @@
+using System.Linq;
 using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Extensions;
@@ -17,6 +18,9 @@ namespace Logic.Systems.Tiles
         private readonly TileSelectionModel _tileSelectionModel = null;
         private readonly TurnCountModel _turnCountModel = null;
         private readonly IMatchChecker _matchChecker = null;
+        
+        private readonly Vector2Int[] _horizontalDirections = new Vector2Int[2] { Vector2Int.left, Vector2Int.right };
+        private readonly Vector2Int[] _verticalDirections = new Vector2Int[2] { Vector2Int.up, Vector2Int.down };
 
         public void Run()
         {
@@ -50,10 +54,9 @@ namespace Logic.Systems.Tiles
 
             if(_gameFieldModel.IsAdjacent(selectedTile.Position, clickedTile.Position) && _turnCountModel.TurnCount > 0)
             {
-                var firstMatches =
-                    _matchChecker.CheckMatches(_gameFieldModel, clickedTile.Position, selectedTile.Color);
-                var secondMatches =
-                    _matchChecker.CheckMatches(_gameFieldModel, selectedTile.Position, clickedTile.Color);
+                var firstMatches = HasMatches(clickedTile.Position, selectedTile.Position, selectedTile.Color);
+                var secondMatches = HasMatches(selectedTile.Position, clickedTile.Position, clickedTile.Color);
+                
                 if (firstMatches || secondMatches)
                 {
                     _world.SendMessage<TurnEvent>();
@@ -72,6 +75,17 @@ namespace Logic.Systems.Tiles
         {
             _gameFieldModel[_tileSelectionModel.SelectedTile].IsSelected = false;
             _tileSelectionModel.Deselect();
+        }
+
+        private bool HasMatches(Vector2Int checkedTile, Vector2Int adjacentTile, Color color)
+        {
+            var excludedDirection = adjacentTile - checkedTile;
+
+            var horDirections = _horizontalDirections.Where(dir => dir != excludedDirection);
+            var vertDirections = _verticalDirections.Where(dir => dir != excludedDirection);
+            
+            return _matchChecker.CheckMatches(_gameFieldModel, checkedTile, horDirections, color) || 
+                   _matchChecker.CheckMatches(_gameFieldModel, checkedTile, vertDirections, color);
         }
     }
 }
