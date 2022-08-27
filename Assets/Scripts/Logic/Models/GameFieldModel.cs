@@ -1,40 +1,42 @@
+using Assets.Scripts.Logic.Descriptions;
+using Logic.Descriptions;
 using UnityEngine;
 
-public class GameFieldModel
+namespace Logic.Models
 {
-    private readonly TileModel[,] _tiles;
-
-    public GameFieldModel(GameFieldDescription gameFieldDescription)
+    public class GameFieldModel
     {
-        EmptyTileState = gameFieldDescription.EmptyFieldState;
-        MaxTileState = gameFieldDescription.MaxState;
-        _tiles = new TileModel[gameFieldDescription.Width, gameFieldDescription.Height];
-        
-        for(var i = 0; i < gameFieldDescription.Width; i++)
+        private readonly TileModel[,] _tiles;
+
+        public GameFieldModel(GameFieldDescription gameFieldDescription, TileColorsDescription tileColorsDescription)
         {
-            for (var j = 0; j < gameFieldDescription.Height; j++)
+            _tiles = new TileModel[gameFieldDescription.Width, gameFieldDescription.Height];
+        
+            for(var i = 0; i < gameFieldDescription.Width; i++)
             {
-                _tiles[i, j] = new TileModel
+                for (var j = 0; j < gameFieldDescription.Height; j++)
                 {
-                    IsSelected = false,
-                    Position = new UnityEngine.Vector2Int(i, j),
-                    State = gameFieldDescription.EmptyFieldState
-                };
+                    _tiles[i, j] = new TileModel
+                    {
+                        IsSelected = false,
+                        Position = new Vector2Int(i, j),
+                        HasBall = true,
+                        Color = tileColorsDescription.DefaultColor,
+                    };
+                }
             }
         }
-    }
-
-    public int EmptyTileState { get; private set; }
-    public int MaxTileState { get; private set; }
-    public int Width => _tiles.GetLength(0);
-    public int Height => _tiles.GetLength(1);
-    public TileModel this[Vector2Int position] => _tiles[position.x, position.y];
-    public TileModel this[int x, int y] => _tiles[x, y];
-    public bool IsInside(Vector2Int position) => position.x >= 0 && position.x < Width && position.y >= 0 && position.y < Height;
-    public bool IsAdjacent(Vector2Int firstPos, Vector2Int secondPos)
-    {
-        var dx = Mathf.Abs(secondPos.x - firstPos.x);
-        var dy = Mathf.Abs(secondPos.y - firstPos.y);
-        return dx + dy == 1;
+        
+        public int Width => _tiles.GetLength(0);
+        public int Height => _tiles.GetLength(1);
+        public TileModel this[Vector2Int position] => _tiles[position.x, position.y];
+        public TileModel this[int x, int y] => _tiles[x, y];
+        public bool IsInside(Vector2Int position) => position.x >= 0 && position.x < Width && position.y >= 0 && position.y < Height;
+        public bool IsAdjacent(Vector2Int firstPos, Vector2Int secondPos)
+        {
+            var dx = Mathf.Abs(secondPos.x - firstPos.x);
+            var dy = Mathf.Abs(secondPos.y - firstPos.y);
+            return dx + dy == 1;
+        }
     }
 }

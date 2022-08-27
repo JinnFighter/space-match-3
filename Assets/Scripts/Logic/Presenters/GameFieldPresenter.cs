@@ -1,25 +1,19 @@
-using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Models;
+using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
+using Logic.Models;
+using Logic.Views;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Logic.Presenters
+namespace Logic.Presenters
 {
     public class GameFieldPresenter : IPresenter
     {
-        [Inject]
-        private readonly GameFieldModel _gameFieldModel;
-        [Inject]
-        private readonly TileClickInputModel _tileClickInputModel;
-        [Inject]
-        private readonly GameFieldDescription _gameFieldDescription;
-        [Inject]
-        private readonly TileColorsDescription _tileColorsDescription;
-        [Inject]
-        private readonly GameFieldView _gameFieldView;
-        [Inject]
-        private readonly TileView _tilePrefab;
+        [Inject] private readonly GameFieldModel _gameFieldModel;
+        [Inject] private readonly TileClickInputModel _tileClickInputModel;
+        [Inject] private readonly GameFieldView _gameFieldView;
+        [Inject] private readonly TileView _tilePrefab;
 
         private IPresenter[,] _presenters;
 
@@ -36,13 +30,13 @@ namespace Assets.Scripts.Logic.Presenters
             _presenters = new IPresenter[_gameFieldModel.Width, _gameFieldModel.Height];
             var layoutTransform = _gameFieldView.Layout.transform;
 
-            for (int i = 0; i < _gameFieldModel.Width; i++)
+            for (var i = 0; i < _gameFieldModel.Width; i++)
             {
-                for (int j = 0; j < _gameFieldModel.Height; j++)
+                for (var j = 0; j < _gameFieldModel.Height; j++)
                 {
                     var view = Object.Instantiate(_tilePrefab, layoutTransform);
 
-                    var presenter = new TilePresenter(_gameFieldModel[i, j], _tileClickInputModel, _gameFieldDescription, _tileColorsDescription, view);
+                    var presenter = new TilePresenter(_gameFieldModel[i, j], _tileClickInputModel, view);
                     _presenters[i, j] = presenter;
                     presenter.Enable();
                 }

@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Extensions;
 using Leopotam.Ecs;
-using System.Collections.Generic;
+using Logic.Models;
 using UnityEngine;
 
-namespace Assets.Scripts.Logic.Systems.GameField
+namespace Logic.Systems.GameField
 {
     public class CheckMatchesSystem : IEcsRunSystem
     {
@@ -43,7 +44,7 @@ namespace Assets.Scripts.Logic.Systems.GameField
            foreach(var direction in directions)
            {
                 var currentPosition = startPosition + direction;
-                if(_gameFieldModel.IsInside(currentPosition) && !visitStates[currentPosition.x, currentPosition.y] && _gameFieldModel[currentPosition].State == _gameFieldModel[startPosition].State)
+                if(_gameFieldModel.IsInside(currentPosition) && !visitStates[currentPosition.x, currentPosition.y] && _gameFieldModel[currentPosition].Color == _gameFieldModel[startPosition].Color)
                 {
                     matches.AddRange(GetMatches(currentPosition, directions, visitStates));
                 }

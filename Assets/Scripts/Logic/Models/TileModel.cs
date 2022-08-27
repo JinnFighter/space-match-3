@@ -1,38 +1,57 @@
 using System;
 using UnityEngine;
 
-public class TileModel
+namespace Logic.Models
 {
-    public Vector2Int Position;
-
-    private int _state;
-    public int State
+    public class TileModel
     {
-        get => _state;
-        set
+        public Vector2Int Position;
+
+        private Color _color;
+        public Color Color
         {
-            if(_state != value)
+            get => _color;
+            set
             {
-                _state = value;
-                StateChanged?.Invoke(_state);
+                if (_color != value)
+                {
+                    _color = value;
+                    ColorChanged?.Invoke(_color);
+                }
             }
         }
-    }
 
-    private bool _isSelected;
-    public bool IsSelected
-    {
-        get => _isSelected;
-        set
+        private bool _hasBall;
+
+        public bool HasBall
         {
-            if(_isSelected != value)
+            get => _hasBall;
+            set
             {
-                _isSelected = value;
-                IsSelectedChanged?.Invoke(_isSelected);
+                if (_hasBall != value)
+                {
+                    _hasBall = value;
+                    HasBallChanged?.Invoke(_hasBall);
+                }
             }
         }
-    }
 
-    public event Action<bool> IsSelectedChanged;
-    public event Action<int> StateChanged;
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if(_isSelected != value)
+                {
+                    _isSelected = value;
+                    IsSelectedChanged?.Invoke(_isSelected);
+                }
+            }
+        }
+
+        public event Action<bool> IsSelectedChanged;
+        public event Action<Color> ColorChanged;
+        public event Action<bool> HasBallChanged;
+    }
 }

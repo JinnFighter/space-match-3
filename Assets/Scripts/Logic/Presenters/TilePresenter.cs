@@ -1,46 +1,50 @@
-using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Models;
-using Assets.Scripts.Logic.Views;
-using Zenject;
+using Assets.Scripts.Logic.Presenters;
+using Logic.Models;
+using Logic.Views;
+using UnityEngine;
 
-namespace Assets.Scripts.Logic.Presenters
+namespace Logic.Presenters
 {
     public class TilePresenter : IPresenter
     {
         private readonly TileModel _tileModel;
         private readonly TileClickInputModel _tileClickInputModel;
-        private readonly GameFieldDescription _gameFieldDescription;
-        private readonly TileColorsDescription _tileColorsDescription;
 
         private readonly TileView _tileView;
 
-        public TilePresenter(TileModel tileModel,  TileClickInputModel tileClickInputModel, GameFieldDescription gameFieldDescription, TileColorsDescription tileColorsDescription, TileView tileView)
+        public TilePresenter(TileModel tileModel,  TileClickInputModel tileClickInputModel, TileView tileView)
         {
             _tileModel = tileModel;
             _tileClickInputModel = tileClickInputModel;
-            _gameFieldDescription = gameFieldDescription;
-            _tileColorsDescription = tileColorsDescription;
             _tileView = tileView;
         }
 
         public void Disable()
         {
-            _tileModel.StateChanged -= OnStateChanged;
+            _tileModel.HasBallChanged -= OnHasBallChanged;
+            _tileModel.ColorChanged -= OnColorChanged;
             _tileModel.IsSelectedChanged -= OnIsSelectedChanged;
             _tileView.ClickedEvent -= OnTileClicked;
         }
 
         public void Enable()
         {
-            _tileModel.StateChanged += OnStateChanged;
+            _tileModel.HasBallChanged += OnHasBallChanged;
+            _tileModel.ColorChanged += OnColorChanged;
             _tileModel.IsSelectedChanged += OnIsSelectedChanged;
             _tileView.ClickedEvent += OnTileClicked;
 
-            _tileView.SetColor(_tileColorsDescription[_tileModel.State]);
+            _tileView.SetColor(_tileModel.Color);
             if (_tileModel.IsSelected)
             {
                 _tileView.Select();
             }
+        }
+
+        private void OnColorChanged(Color color)
+        {
+            _tileView.SetColor(color);
         }
 
         private void OnTileClicked()
@@ -60,16 +64,15 @@ namespace Assets.Scripts.Logic.Presenters
             }
         }
 
-        private void OnStateChanged(int state)
+        private void OnHasBallChanged(bool hasBall)
         {
-            if (state == _gameFieldDescription.EmptyFieldState)
+            if (hasBall)
             {
-                _tileView.DisableBall();
+                _tileView.EnableBall();
             }
             else
             {
-                _tileView.EnableBall();
-                _tileView.SetColor(_tileColorsDescription[state]);
+                _tileView.DisableBall();
             }
         }
     }

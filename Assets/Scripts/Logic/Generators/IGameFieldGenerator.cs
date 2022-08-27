@@ -1,7 +1,9 @@
-namespace Assets.Scripts.Logic.Generators
+using UnityEngine;
+
+namespace Logic.Generators
 {
     public interface IGameFieldGenerator
     {
-        int[,] GenerateGameField(int width, int height);
+        Color[,] GenerateGameField(int width, int height);
     }
 }

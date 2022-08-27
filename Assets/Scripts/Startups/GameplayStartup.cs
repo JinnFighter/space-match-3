@@ -1,7 +1,7 @@
 using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
-using Assets.Scripts.Logic.Generators;
+using Assets.Scripts.Logic.Descriptions;
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Systems.GameField;
@@ -11,7 +11,10 @@ using Assets.Scripts.Logic.Systems.Tiles;
 using Assets.Scripts.Logic.Systems.Ui;
 using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
+using Logic.Generators;
 using Logic.MatchCheckers;
+using Logic.Models;
+using Logic.Systems.GameField;
 using Logic.Systems.Tiles;
 using UnityEngine;
 using Voody.UniLeo;
@@ -24,6 +27,7 @@ namespace Startups
         private EcsWorld _world;
         private EcsSystems _systems;
 
+        [Inject] private TileColorsDescription _tileColorsDescription;
         [Inject] private PresenterContainer _presenterContainer;
         [Inject] private TileClickInputModel _tileClickInputModel;
         [Inject] private GameFieldModel _gameFieldModel;
@@ -87,7 +91,6 @@ namespace Startups
                 .Add(new ClearMatchedTileSystem())
                 .Add(new AddScoreOnMatchSystem())
                 .Add(new ShiftTilesSystem())
-                .Add(new UpdateTileStatesSystem())
                 .Add(new EnableGameOverViewSystem());
         }
 
@@ -101,6 +104,7 @@ namespace Startups
                 .Inject(_turnCountModel)
                 .Inject(_gameFieldGenerator)
                 .Inject(_matchChecker)
+                .Inject(_tileColorsDescription)
                 .Inject(_gameOverView)
                 .Inject(_viewContainer);
         }

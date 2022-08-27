@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Logic.Views
+namespace Logic.Views
 {
     public class TileView : MonoBehaviour, IPointerClickHandler
     {
