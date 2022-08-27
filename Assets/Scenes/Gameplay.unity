@@ -1147,6 +1147,7 @@ MonoBehaviour:
   _tileView: {fileID: 4804012768253041941, guid: 991f99147b6f7544687c260d06a4d45f, type: 3}
   _uiView: {fileID: 377888486}
   _viewContainer: {fileID: 1734224751}
+  _gameOverView: {fileID: 1032555203}
 --- !u!1001 &3890097595024211647
 PrefabInstance:
   m_ObjectHideFlags: 0
