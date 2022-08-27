@@ -16,45 +16,47 @@ namespace Assets.Scripts.Logic.Systems.GameField
 
         public void Run()
         {
-            foreach(var index in _filter)
+            foreach(var _ in _filter)
             {
-                var match = _filter.Get1(index);
-                foreach(var tilePosition in match.MatchPositions)
+                for (var i = 0; i < _gameFieldModel.Height; i++)
                 {
-                    ShiftTiles(tilePosition);
+                    ShiftTilesDown(i);
                 }
 
                 _world.SendMessage<CheckMatchRequest>();
             }
         }
 
-        private void ShiftTiles(Vector2Int startPosition)
+        private void ShiftTilesDown(int y)
         {
             var emptyCount = 0;
-            var tileColumn = new List<Vector2Int>();
-            for (int y = startPosition.y; y < _gameFieldModel.Height; y++)
+            var validStates = new Stack<int>();
+            for (var x = 0; x < _gameFieldModel.Height; x++)
             {
-                var tile = _gameFieldModel[startPosition.x, y];
+                var tile = _gameFieldModel[x, y];
                 if(tile.State == _gameFieldModel.EmptyTileState)
                 {
                     emptyCount++;
                 }
-                tileColumn.Add(tile.Position);
-            }
-
-            for (int i = 0; i < emptyCount; i++)
-            {
-                for (int j = 0; j < tileColumn.Count - 1; j++)
+                else
                 {
-                    _gameFieldModel[tileColumn[j]].State = _gameFieldModel[tileColumn[j + 1]].State;
-                    _gameFieldModel[tileColumn[j + 1]].State = _gameFieldModel.EmptyTileState;
+                    validStates.Push(tile.State);
                 }
             }
 
-            for (var i = 0; i < emptyCount; i++)
+            if (emptyCount > 0)
             {
-                var tile = _gameFieldModel[tileColumn[tileColumn.Count - 1 - i]];
-                tile.State = GetNewState(tile.Position);
+                for (var x = _gameFieldModel.Height - 1; x > 0; x--)
+                {
+                    var tile = _gameFieldModel[x, y];
+                    tile.State = validStates.Count > 0 ? validStates.Pop() : _gameFieldModel.EmptyTileState;
+                }
+
+                for (var i = 0; i < emptyCount; i++)
+                {
+                    var tile = _gameFieldModel[i, y];
+                    tile.State = GetNewState(tile.Position);
+                }
             }
         }
 
