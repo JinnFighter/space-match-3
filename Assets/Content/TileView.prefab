@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3726994890299944750}
   - component: {fileID: 2971270737865040553}
   - component: {fileID: 2979802649363868877}
+  - component: {fileID: 6125402332896700371}
   m_Layer: 5
   m_Name: Ball
   m_TagString: Untagged
@@ -99,6 +100,19 @@ ParentConstraint:
   m_IsContraintActive: 1
   m_IsLocked: 0
   m_Sources: []
+--- !u!114 &6125402332896700371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232475730516406960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98927cc79761604688a4bd4b23bd2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballImage: {fileID: 2971270737865040553}
 --- !u!1 &6902750920082164429
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,5 +203,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b81ab09ca4c8774086aec4565a2d766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballImage: {fileID: 2971270737865040553}
-  IsClicked: 0
+  <BallView>k__BackingField: {fileID: 6125402332896700371}

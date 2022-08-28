@@ -35,16 +35,16 @@ namespace Logic.Presenters
             _tileModel.IsSelectedChanged += OnIsSelectedChanged;
             _tileView.ClickedEvent += OnTileClicked;
 
-            _tileView.SetColor(_tileModel.Color);
+            _tileView.BallView.SetColor(_tileModel.Color);
             if (_tileModel.IsSelected)
             {
-                _tileView.Select();
+                _tileView.BallView.Select();
             }
         }
 
         private void OnColorChanged(Color color)
         {
-            _tileView.SetColor(color);
+            _tileView.BallView.SetColor(color);
         }
 
         private void OnTileClicked()
@@ -56,11 +56,11 @@ namespace Logic.Presenters
         {
             if (isSelected)
             {
-                _tileView.Select();
+                _tileView.BallView.Select();
             }
             else
             {
-                _tileView.Deselect();
+                _tileView.BallView.Deselect();
             }
         }
 
@@ -68,11 +68,11 @@ namespace Logic.Presenters
         {
             if (hasBall)
             {
-                _tileView.EnableBall();
+                _tileView.BallView.GameObject.SetActive(true);
             }
             else
             {
-                _tileView.DisableBall();
+                _tileView.BallView.GameObject.SetActive(false);
             }
         }
     }
