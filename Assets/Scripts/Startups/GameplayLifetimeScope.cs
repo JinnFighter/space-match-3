@@ -9,7 +9,6 @@ using Logic.MatchCheckers;
 using Logic.Models;
 using Logic.Presenters;
 using Logic.Views;
-using Startups;
 using Startups.LogicContainers;
 using UnityEngine;
 using VContainer;
@@ -48,6 +47,7 @@ public class GameplayLifetimeScope : LifetimeScope
     
     private void BindModels(IContainerBuilder builder)
     {
+        builder.Register<GameStateModel>(Lifetime.Singleton);
         builder.Register<TileClickInputModel>(Lifetime.Singleton);
         builder.Register<GameFieldModel>(Lifetime.Singleton);
         builder.Register<TileSelectionModel>(Lifetime.Singleton);
@@ -80,6 +80,7 @@ public class GameplayLifetimeScope : LifetimeScope
         builder.Register<GameFieldPresenter>(Lifetime.Singleton);
         builder.Register<ScorePresenter>(Lifetime.Singleton);
         builder.Register<TurnCountPresenter>(Lifetime.Singleton);
+        builder.Register<GameOverPresenter>(Lifetime.Singleton);
 
         builder.Register<PresenterContainer>(Lifetime.Singleton);
     }

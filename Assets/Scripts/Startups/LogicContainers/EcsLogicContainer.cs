@@ -1,4 +1,3 @@
-using Assets.Scripts.Common;
 using Assets.Scripts.Logic.Components.Gameplay;
 using Assets.Scripts.Logic.Components.Tiles;
 using Assets.Scripts.Logic.Descriptions;
@@ -7,8 +6,6 @@ using Assets.Scripts.Logic.Systems.GameField;
 using Assets.Scripts.Logic.Systems.Gameplay;
 using Assets.Scripts.Logic.Systems.Input;
 using Assets.Scripts.Logic.Systems.Tiles;
-using Assets.Scripts.Logic.Systems.Ui;
-using Assets.Scripts.Logic.Views;
 using Leopotam.Ecs;
 using Logic.Generators;
 using Logic.MatchCheckers;
@@ -24,19 +21,31 @@ namespace Startups.LogicContainers
     {
         private EcsWorld _world;
         private EcsSystems _systems;
-
-        [Inject] private TileColorsDescription _tileColorsDescription;
-        [Inject] private TileClickInputModel _tileClickInputModel;
-        [Inject] private GameFieldModel _gameFieldModel;
-        [Inject] private TileSelectionModel _tileSelectionModel;
-        [Inject] private ScoreModel _scoreModel;
-        [Inject] private TurnCountModel _turnCountModel;
-        [Inject] private IGameFieldGenerator _gameFieldGenerator;
-        [Inject] private IMatchChecker _matchChecker;
-        [Inject] private ViewContainer _viewContainer;
-
-        [Inject] private GameOverView _gameOverView;
         
+        private readonly TileColorsDescription _tileColorsDescription;
+        private readonly TileClickInputModel _tileClickInputModel;
+        private readonly GameStateModel _gameStateModel;
+        private readonly GameFieldModel _gameFieldModel;
+        private readonly TileSelectionModel _tileSelectionModel;
+        private readonly ScoreModel _scoreModel;
+        private readonly TurnCountModel _turnCountModel;
+        private readonly IGameFieldGenerator _gameFieldGenerator;
+        private readonly IMatchChecker _matchChecker;
+
+        [Inject]
+        public EcsLogicContainer(TileColorsDescription tileColorsDescription, TileClickInputModel tileClickInputModel, GameStateModel gameStateModel, GameFieldModel gameFieldModel, TileSelectionModel tileSelectionModel, ScoreModel scoreModel, TurnCountModel turnCountModel, IGameFieldGenerator gameFieldGenerator, IMatchChecker matchChecker)
+        {
+            _tileColorsDescription = tileColorsDescription;
+            _tileClickInputModel = tileClickInputModel;
+            _gameStateModel = gameStateModel;
+            _gameFieldModel = gameFieldModel;
+            _tileSelectionModel = tileSelectionModel;
+            _scoreModel = scoreModel;
+            _turnCountModel = turnCountModel;
+            _gameFieldGenerator = gameFieldGenerator;
+            _matchChecker = matchChecker;
+        }
+
         public void Init()
         {
             _world = new EcsWorld();
@@ -93,13 +102,13 @@ namespace Startups.LogicContainers
                 .Add(new CheckMatchesSystem())
                 .Add(new ClearMatchedTileSystem())
                 .Add(new AddScoreOnMatchSystem())
-                .Add(new ShiftTilesSystem())
-                .Add(new EnableGameOverViewSystem());
+                .Add(new ShiftTilesSystem());
         }
 
         private void AddInjections()
         {
             _systems
+                .Inject(_gameStateModel)
                 .Inject(_tileClickInputModel)
                 .Inject(_gameFieldModel)
                 .Inject(_tileSelectionModel)
@@ -107,9 +116,7 @@ namespace Startups.LogicContainers
                 .Inject(_turnCountModel)
                 .Inject(_gameFieldGenerator)
                 .Inject(_matchChecker)
-                .Inject(_tileColorsDescription)
-                .Inject(_gameOverView)
-                .Inject(_viewContainer);
+                .Inject(_tileColorsDescription);
         }
 
         private void AddInitSystems()
