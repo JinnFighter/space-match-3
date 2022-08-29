@@ -1,6 +1,6 @@
 using Startups.LogicContainers;
 using UnityEngine;
-using Zenject;
+using VContainer;
 
 namespace Startups
 {

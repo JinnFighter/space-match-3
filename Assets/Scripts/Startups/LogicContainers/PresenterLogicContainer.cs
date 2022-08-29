@@ -1,5 +1,5 @@
 using Assets.Scripts.Logic.Presenters;
-using Zenject;
+using VContainer;
 
 namespace Startups.LogicContainers
 {
