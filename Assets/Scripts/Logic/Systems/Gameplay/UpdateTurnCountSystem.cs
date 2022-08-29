@@ -10,6 +10,7 @@ namespace Assets.Scripts.Logic.Systems.Gameplay
         private readonly EcsWorld _world = null;
         private readonly EcsFilter<TurnEvent> _filter = null;
         private readonly TurnCountModel _turnCountModel = null;
+        private readonly GameStateModel _gameStateModel = null;
 
         public void Run()
         {
@@ -19,6 +20,7 @@ namespace Assets.Scripts.Logic.Systems.Gameplay
                 if(_turnCountModel.TurnCount == 0)
                 {
                     _world.SendMessage<GameOverEvent>();
+                    _gameStateModel.InvokeGameOver();
                 }
             }
         }

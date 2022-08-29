@@ -5,7 +5,13 @@ namespace Startups.LogicContainers
 {
     public class PresenterLogicContainer : ILogicContainer
     {
-        [Inject] private readonly PresenterContainer _presenterContainer;
+        private readonly PresenterContainer _presenterContainer;
+
+        [Inject]
+        public PresenterLogicContainer(PresenterContainer presenterContainer)
+        {
+            _presenterContainer = presenterContainer;
+        }
         
         public void Init()
         {
