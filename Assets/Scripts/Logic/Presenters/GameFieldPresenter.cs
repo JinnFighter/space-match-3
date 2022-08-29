@@ -4,7 +4,7 @@ using Assets.Scripts.Logic.Views;
 using Logic.Models;
 using Logic.Views;
 using UnityEngine;
-using Zenject;
+using VContainer;
 
 namespace Logic.Presenters
 {

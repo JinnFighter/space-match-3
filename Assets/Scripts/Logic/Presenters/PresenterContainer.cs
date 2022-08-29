@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Logic.Presenters;
-using Zenject;
+using VContainer;
 
 namespace Assets.Scripts.Logic.Presenters
 {

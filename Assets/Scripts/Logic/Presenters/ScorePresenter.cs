@@ -1,7 +1,7 @@
 using Assets.Scripts.Logic.Models;
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
-using Zenject;
+using VContainer;
 
 public class ScorePresenter : IPresenter
 {

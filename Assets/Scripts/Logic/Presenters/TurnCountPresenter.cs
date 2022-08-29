@@ -1,5 +1,5 @@
 using Assets.Scripts.Logic.Models;
-using Zenject;
+using VContainer;
 
 namespace Assets.Scripts.Logic.Presenters
 {

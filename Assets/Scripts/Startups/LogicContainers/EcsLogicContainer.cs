@@ -15,8 +15,8 @@ using Logic.MatchCheckers;
 using Logic.Models;
 using Logic.Systems.GameField;
 using Logic.Systems.Tiles;
+using VContainer;
 using Voody.UniLeo;
-using Zenject;
 
 namespace Startups.LogicContainers
 {
