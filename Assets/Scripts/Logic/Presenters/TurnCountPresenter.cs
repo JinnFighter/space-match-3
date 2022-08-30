@@ -5,10 +5,15 @@ namespace Assets.Scripts.Logic.Presenters
 {
     public class TurnCountPresenter : IPresenter
     {
-        [Inject]
         private readonly TurnCountModel _turnCountModel;
-        [Inject]
         private readonly TurnCountView _turnCountView;
+
+        [Inject]
+        public TurnCountPresenter(TurnCountModel turnCountModel, TurnCountView turnCountView)
+        {
+            _turnCountModel = turnCountModel;
+            _turnCountView = turnCountView;
+        }
 
         public void Disable()
         {

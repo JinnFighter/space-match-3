@@ -10,10 +10,19 @@ namespace Logic.Presenters
 {
     public class GameFieldPresenter : IPresenter
     {
-        [Inject] private readonly GameFieldModel _gameFieldModel;
-        [Inject] private readonly TileClickInputModel _tileClickInputModel;
-        [Inject] private readonly GameFieldView _gameFieldView;
-        [Inject] private readonly TileView _tilePrefab;
+        private readonly GameFieldModel _gameFieldModel;
+        private readonly TileClickInputModel _tileClickInputModel;
+        private readonly GameFieldView _gameFieldView;
+        private readonly TileView _tilePrefab;
+
+        [Inject]
+        public GameFieldPresenter(GameFieldModel gameFieldModel, TileClickInputModel tileClickInputModel, GameFieldView gameFieldView, TileView tilePrefab)
+        {
+            _gameFieldModel = gameFieldModel;
+            _tileClickInputModel = tileClickInputModel;
+            _gameFieldView = gameFieldView;
+            _tilePrefab = tilePrefab;
+        }
 
         private IPresenter[,] _presenters;
 

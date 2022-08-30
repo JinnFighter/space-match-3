@@ -1,14 +1,23 @@
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
+using UnityEngine.SceneManagement;
 using VContainer;
 
 public class GameOverPresenter : IPresenter
 {
-    [Inject] private readonly GameStateModel _gameStateModel;
-    [Inject] private readonly GameOverView _gameOverView;
-    
+    private readonly GameStateModel _gameStateModel;
+    private readonly GameOverView _gameOverView;
+
+    [Inject]
+    public GameOverPresenter(GameStateModel gameStateModel, GameOverView gameOverView)
+    {
+        _gameStateModel = gameStateModel;
+        _gameOverView = gameOverView;
+    }
+
     public void Disable()
     {
+        _gameOverView.RestartButton.onClick.RemoveListener(OnRestartButtonClicked);
         _gameStateModel.GameOverEvent -= OnGameOverEvent;
         if (!_gameStateModel.IsActive)
         {
@@ -18,11 +27,17 @@ public class GameOverPresenter : IPresenter
 
     public void Enable()
     {
+        _gameOverView.RestartButton.onClick.AddListener(OnRestartButtonClicked);
         _gameStateModel.GameOverEvent += OnGameOverEvent;
         if (!_gameStateModel.IsActive)
         {
             ShowGameOverScreen();
         }
+    }
+
+    private void OnRestartButtonClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnGameOverEvent()

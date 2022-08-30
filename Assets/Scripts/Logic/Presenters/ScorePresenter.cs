@@ -5,10 +5,15 @@ using VContainer;
 
 public class ScorePresenter : IPresenter
 {
-    [Inject]
     private readonly ScoreModel _scoreModel;
-    [Inject]
     private readonly ScoreView _scoreView;
+
+    [Inject]
+    public ScorePresenter(ScoreModel scoreModel, ScoreView scoreView)
+    {
+        _scoreModel = scoreModel;
+        _scoreView = scoreView;
+    }
 
     public void Disable()
     {
