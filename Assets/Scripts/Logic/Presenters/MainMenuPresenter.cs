@@ -1,5 +1,4 @@
 using Assets.Scripts.Logic.Presenters;
-using UnityEngine.SceneManagement;
 using VContainer;
 
 public class MainMenuPresenter : IPresenter
@@ -24,6 +23,6 @@ public class MainMenuPresenter : IPresenter
 
     private void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene("Gameplay");
+        BootLoader.Instance.Load("Gameplay");
     }
 }

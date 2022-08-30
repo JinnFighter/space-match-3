@@ -1,12 +1,7 @@
 {
-    "name": "Startups",
+    "name": "Loader",
     "rootNamespace": "",
     "references": [
-        "GUID:423ca1873c6e2d94f9fc0ff30ef25d72",
-        "GUID:656c2c43d3cfe4855bd40e058874b0be",
-        "GUID:0104ae351448541ee9a4ab55eb9d8b69",
-        "GUID:afc1c9628529ec342bc022d3e9e5a099",
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
         "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
