@@ -1,6 +1,5 @@
 using Assets.Scripts.Logic.Presenters;
 using Assets.Scripts.Logic.Views;
-using UnityEngine.SceneManagement;
 using VContainer;
 
 public class GameOverPresenter : IPresenter
@@ -37,7 +36,7 @@ public class GameOverPresenter : IPresenter
 
     private void OnRestartButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        BootLoader.Instance.Load("Gameplay");
     }
 
     private void OnGameOverEvent()
